@@ -12,5 +12,12 @@
   },
   "dependencies": {
     "xmlbuilder": "^13.0.1"
+  },
+  "devDependencies": {
+    "node-red": "^0.20.5",
+    "node-red-node-test-helper": "^0.2.2"
+  },
+  "scripts": {
+    "test": "mocha \"test/**/*_spec.js\""
   }
 }
