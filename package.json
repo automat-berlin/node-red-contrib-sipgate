@@ -5,7 +5,8 @@
     "nodes": {
       "hangup": "nodes/push/hangup.js",
       "reject": "nodes/push/reject.js",
-      "play": "nodes/push/play.js"
+      "play": "nodes/push/play.js",
+      "gather": "nodes/push/gather.js"
     }
   },
   "dependencies": {

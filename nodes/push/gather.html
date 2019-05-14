@@ -1,0 +1,51 @@
+<script type="text/javascript">
+  RED.nodes.registerType('gather', {
+    category: 'sipgate',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      onData: { value: "", required: true },
+      maxDigits: { value: "1" },
+      timeout: { value: "2000" },
+      playUrl: { value: "" },
+      onHangup: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "sipgate.png",
+    label: function() {
+      return this.name || "gather";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="gather">
+  <div class="form-row">
+    <label for="node-input-onData"><i class="fa fa-globe"></i> onData</label>
+    <input type="text" id="node-input-onData" placeholder="onData callback URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-maxDigits"><i class="fa fa-tag"></i> maxDigits</label>
+    <input type="text" id="node-input-maxDigits" placeholder="maxDigits (default: 1)">
+  </div>
+  <div class="form-row">
+    <label for="node-input-timeout"><i class="fa fa-clock-o"></i> Timeout</label>
+    <input type="text" id="node-input-timeout" placeholder="Timeout (ms) (default: 2000)">
+  </div>
+  <div class="form-row">
+    <label for="node-input-playUrl"><i class="fa fa-globe"></i> Sound URL</label>
+    <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onHangup"><i class="fa fa-globe"></i> onHangup</label>
+    <input type="text" id="node-input-onHangup" placeholder="onHangup callback URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="gather">
+  <p>Collects digits that a caller enters with the telephone keypad</p>
+</script>
