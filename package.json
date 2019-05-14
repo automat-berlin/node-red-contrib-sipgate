@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "node-red": {
     "nodes": {
-      "hangup": "nodes/push/hangup.js"
+      "hangup": "nodes/push/hangup.js",
+      "reject": "nodes/push/reject.js"
     }
   },
   "dependencies": {
