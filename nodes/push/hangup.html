@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('hangup', {
+    category: 'sipgate',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "sipgate.png",
+    label: function() {
+      return this.name || "hangup";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="hangup">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="hangup">
+  <p>Hang up calls</p>
+</script>
