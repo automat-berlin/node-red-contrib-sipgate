@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  RED.nodes.registerType('play', {
+    category: 'sipgate',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      url: { value: "", required: true },
+      onHangup: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "sipgate.png",
+    label: function() {
+      return this.name || "play";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="play">
+  <div class="form-row">
+    <label for="node-input-url"><i class="fa fa-globe"></i> Sound URL</label>
+    <input type="text" id="node-input-url" placeholder="Sound file URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onHangup"><i class="fa fa-globe"></i> onHangup</label>
+    <input type="text" id="node-input-onHangup" placeholder="onHangup callback URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="play">
+  <p>Play a sound file</p>
+</script>

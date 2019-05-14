@@ -4,7 +4,8 @@
   "node-red": {
     "nodes": {
       "hangup": "nodes/push/hangup.js",
-      "reject": "nodes/push/reject.js"
+      "reject": "nodes/push/reject.js",
+      "play": "nodes/push/play.js"
     }
   },
   "dependencies": {
