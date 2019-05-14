@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  RED.nodes.registerType('dial', {
+    category: 'sipgate',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      target: { value: "number", required: true },
+      number: { value: "" },
+      anonymous: { value: "" },
+      callerId: { value: "" },
+      onHangup: { value: "" },
+      onAnswer: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "sipgate.png",
+    label: function() {
+      return this.name || "dial";
+    },
+    oneditprepare: function() {
+      var node = this;
+      $("#node-input-target").change(function(e) {
+        var val = $(this).val();
+        $(".node-row-number").toggle(val === "number");
+      });
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="dial">
+  <div class="form-row">
+    <label for="node-input-target"><i class="fa fa-tag"></i> Target</label>
+    <select id="node-input-target">
+        <option value="number">Number</option>
+        <option value="voicemail">Voicemail</option>
+    </select>
+  </div>
+  <div class="node-row-number">
+    <div class="form-row">
+      <label for="node-input-number"><i class="fa fa-tag"></i> Number</label>
+      <input type="text" id="node-input-number" placeholder="Number">
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="node-input-anonymous"><i class="fa fa-tag"></i> Anonymous</label>
+    <input type="checkbox" id="node-input-anonymous">
+  </div>
+  <div class="form-row">
+    <label for="node-input-callerId"><i class="fa fa-tag"></i> Caller ID</label>
+    <input type="text" id="node-input-callerId" placeholder="Caller ID">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onHangup"><i class="fa fa-globe"></i> onHangup</label>
+    <input type="text" id="node-input-onHangup" placeholder="onHangup callback URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onAnswer"><i class="fa fa-globe"></i> onAnswer</label>
+    <input type="text" id="node-input-onAnswer" placeholder="onAnswer callback URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="dial">
+  <p>Send call to voicemail or external number</p>
+</script>

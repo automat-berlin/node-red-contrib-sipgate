@@ -6,7 +6,8 @@
       "hangup": "nodes/push/hangup.js",
       "reject": "nodes/push/reject.js",
       "play": "nodes/push/play.js",
-      "gather": "nodes/push/gather.js"
+      "gather": "nodes/push/gather.js",
+      "dial": "nodes/push/dial.js"
     }
   },
   "dependencies": {
