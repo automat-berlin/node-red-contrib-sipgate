@@ -5,7 +5,7 @@ module.exports = function(RED) {
   function DialNode(config) {
     RED.nodes.createNode(this, config);
     this.target = config.target || 'number';
-    this.number = config.number;
+    this.numbers = config.numbers;
     this.anonymous = config.anonymous;
     this.callerId = config.callerId;
     this.onHangup = config.onHangup;
@@ -21,7 +21,9 @@ module.exports = function(RED) {
         xml.att('callerId', node.callerId);
       }
       if (node.target == 'number') {
-        xml.ele('Number', {}, node.number);
+        for (var number of node.numbers) {
+          xml.ele('Number', {}, number.number);
+        }
       } else if (node.target == 'voicemail') {
         xml.ele('Voicemail');
       }

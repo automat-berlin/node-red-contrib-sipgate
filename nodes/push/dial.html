@@ -5,11 +5,11 @@
     defaults: {
       name: { value: "" },
       target: { value: "number", required: true },
-      number: { value: "" },
       anonymous: { value: "" },
       callerId: { value: "" },
       onHangup: { value: "" },
-      onAnswer: { value: "" }
+      onAnswer: { value: "" },
+      numbers: { value: [{ number: "" }] }
     },
     inputs: 1,
     outputs: 1,
@@ -19,10 +19,64 @@
     },
     oneditprepare: function() {
       var node = this;
+      var container = $("#node-input-numbers-container");
+
+      function resizeNumbers(number) {
+        var newWidth = number.width() - 15;
+        number.find('.red-ui-typedInput').typedInput("width", newWidth);
+      }
+
       $("#node-input-target").change(function(e) {
         var val = $(this).val();
-        $(".node-row-number").toggle(val === "number");
+        $(".node-row-numbers").toggle(val === "number");
       });
+
+      container.css('min-height', '200px').css('min-width', '430px').editableList({
+        addItem: function(container, i, opt) {
+          if (!opt.hasOwnProperty('number')) {
+            opt.number = "";
+          }
+          var row = $('<div/>').appendTo(container);
+          var valueField = $('<input/>', {
+            class: "node-input-number-value",
+            type: "text",
+            style: "margin-left: 5px;"
+          }).appendTo(row)
+          .typedInput({ default: 'num', types: ['num'] });
+          valueField.typedInput('value', opt.number);
+          valueField.typedInput('type', 'num');
+          resizeNumbers(container);
+        },
+        resizeItem: resizeNumbers,
+        removable: true
+      });
+
+      for (var i = 0; i < node.numbers.length; i++) {
+        container.editableList('addItem', node.numbers[i]);
+      }
+    },
+    oneditsave: function() {
+      var numbers = $("#node-input-numbers-container").editableList('items');
+      var node = this;
+      node.numbers = [];
+      numbers.each(function(i) {
+        var number = $(this);
+        var vf = number.find(".node-input-number-value");
+        var value = vf.typedInput('value');
+        var type = vf.typedInput('type');
+        var r = { number: value };
+        node.numbers.push(r);
+      });
+    },
+    oneditresize: function(size) {
+      var rows = $("#dialog-form>div:not(.node-input-numbers-container-row)");
+      var height = size.height;
+      for (var i = 0; i < rows.size(); i++) {
+        height -= $(rows[i]).outerHeight(true);
+      }
+      var editorRow = $("#dialog-form>div.node-input-numbers-container-row");
+      height -= (parseInt(editorRow.css("marginTop")) + parseInt(editorRow.css("marginBottom")));
+      $("#node-input-numbers-container").editableList('height', height);
     }
   });
 </script>
@@ -35,10 +89,12 @@
         <option value="voicemail">Voicemail</option>
     </select>
   </div>
-  <div class="node-row-number">
+  <div class="node-row-numbers">
     <div class="form-row">
-      <label for="node-input-number"><i class="fa fa-tag"></i> Number</label>
-      <input type="text" id="node-input-number" placeholder="Number">
+      <label><i class="fa fa-list"></i> Numbers</label>
+      <div class="form-row node-input-numbers-container-row">
+        <ol id="node-input-numbers-container"></ol>
+      </div>
     </div>
   </div>
   <div class="form-row">
