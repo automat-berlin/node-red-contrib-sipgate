@@ -1,0 +1,23 @@
+{
+  "name": "node-red-contrib-sipgate",
+  "version": "0.1.0",
+  "node-red": {
+    "nodes": {
+      "hangup": "nodes/push/hangup.js",
+      "reject": "nodes/push/reject.js",
+      "play": "nodes/push/play.js",
+      "gather": "nodes/push/gather.js",
+      "dial": "nodes/push/dial.js"
+    }
+  },
+  "dependencies": {
+    "xmlbuilder": "^13.0.1"
+  },
+  "devDependencies": {
+    "node-red": "^0.20.5",
+    "node-red-node-test-helper": "^0.2.2"
+  },
+  "scripts": {
+    "test": "mocha \"test/**/*_spec.js\""
+  }
+}

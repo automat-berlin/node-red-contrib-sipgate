@@ -1,0 +1,34 @@
+<script type="text/javascript">
+  RED.nodes.registerType('reject', {
+    category: 'sipgate',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      reason: { value: "rejected" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "sipgate.png",
+    label: function() {
+      return this.name || "reject";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="reject">
+  <div class="form-row">
+    <label for="node-input-reason"><i class="fa fa-tag"></i> Reason</label>
+    <select id="node-input-reason">
+      <option value="rejected">Rejected</option>
+      <option value="busy">Busy</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="reject">
+  <p>Reject call or pretend to be busy</p>
+</script>
