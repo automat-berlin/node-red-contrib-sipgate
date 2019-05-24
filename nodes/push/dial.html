@@ -44,7 +44,6 @@
           }).appendTo(row)
           .typedInput({ default: 'num', types: ['num'] });
           valueField.typedInput('value', opt.number);
-          valueField.typedInput('type', 'num');
           resizeNumbers(container);
         },
         resizeItem: resizeNumbers,
@@ -63,7 +62,6 @@
         var number = $(this);
         var vf = number.find(".node-input-number-value");
         var value = vf.typedInput('value');
-        var type = vf.typedInput('type');
         var r = { number: value };
         node.numbers.push(r);
       });
