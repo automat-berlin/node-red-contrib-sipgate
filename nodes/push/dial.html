@@ -31,7 +31,7 @@
         $(".node-row-numbers").toggle(val === "number");
       });
 
-      container.css('min-height', '200px').css('min-width', '430px').editableList({
+      container.editableList({
         addItem: function(container, i, opt) {
           if (!opt.hasOwnProperty('number')) {
             opt.number = "";
@@ -80,6 +80,13 @@
     }
   });
 </script>
+
+<style>
+  #node-input-numbers-container {
+    min-height: 200px;
+    min-width: 430px;
+  }
+</style>
 
 <script type="text/x-red" data-template-name="dial">
   <div class="form-row">
