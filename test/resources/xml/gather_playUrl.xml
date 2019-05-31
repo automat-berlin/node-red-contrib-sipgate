@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Gather onData="http://example.com/dtmf" maxDigits="1" timeout="2000">
+    <Gather onData="http://example.com${onData}" maxDigits="1" timeout="2000">
         <Play>
             <Url>http://example.com/example.wav</Url>
         </Play>
