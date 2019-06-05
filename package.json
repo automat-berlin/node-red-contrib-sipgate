@@ -7,7 +7,8 @@
       "reject": "nodes/push/reject.js",
       "play": "nodes/push/play.js",
       "gather": "nodes/push/gather.js",
-      "dial": "nodes/push/dial.js"
+      "dial": "nodes/push/dial.js",
+      "webhook": "nodes/push/webhook.js"
     }
   },
   "dependencies": {
