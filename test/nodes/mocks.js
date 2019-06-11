@@ -7,4 +7,6 @@ var res = {
   }
 };
 
-module.exports = res;
+module.exports = {
+  res: res
+};
