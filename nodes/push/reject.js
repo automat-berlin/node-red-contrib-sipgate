@@ -8,7 +8,8 @@ module.exports = function(RED) {
     var node = this;
     node.on('input', function(msg) {
       msg.payload = xmlbuilder.create('Response').dec('1.0', 'UTF-8').ele('Reject', { 'reason': node.reason }).end({ pretty: true, indent: '    ' });
-      node.send(msg);
+      msg.res._res.set('Content-Type', 'application/xml');
+      msg.res._res.status(200).send(msg.payload);
     });
   }
   RED.nodes.registerType("reject", RejectNode);

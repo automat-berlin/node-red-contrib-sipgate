@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Play>
+        <Url>http://example.com/example.wav</Url>
+    </Play>
+</Response>

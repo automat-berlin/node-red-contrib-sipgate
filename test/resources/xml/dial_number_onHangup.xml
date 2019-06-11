@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response onHangup="http://example.com/callback">
+    <Dial>
+        <Number>4915799912345</Number>
+    </Dial>
+</Response>

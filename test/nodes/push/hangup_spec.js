@@ -2,6 +2,8 @@ var should = require("should");
 var helper = require("node-red-node-test-helper");
 var shared = require("../shared.js");
 var hangupNode = require("../../../nodes/push/hangup.js");
+var res = require("../mocks.js").res;
+var fs = require('fs');
 
 helper.init(require.resolve('node-red'));
 
@@ -18,16 +20,16 @@ describe('hangup node', function() {
 
   shared.shouldLoadCorrectly(hangupNode, "hangup");
 
-  it('should return proper payload', function(done) {
-    var flow = [{ id: "n1", type: "hangup", name: "hangup", wires: [["n2"]] }, { id: "n2", type: "helper" }];
+  it('should respond with proper XML', function(done) {
+    var flow = [{ id: "n1", type: "hangup" }];
+    var xml = fs.readFileSync('test/resources/xml/hangup.xml', 'utf8');
     helper.load(hangupNode, flow, function() {
-      var n2 = helper.getNode("n2");
       var n1 = helper.getNode("n1");
-      n2.on("input", function(msg) {
-        msg.should.have.property('payload', '<?xml version="1.0" encoding="UTF-8"?>\n<Response>\n    <Hangup/>\n</Response>');
+      n1.on("input", function(msg) {
+        should(msg.res._res.responseBody).be.eql(xml);
         done();
       });
-      n1.receive({ payload: 'not important' });
+      n1.receive({ payload: '<call data>', res: res });
     });
   });
 });

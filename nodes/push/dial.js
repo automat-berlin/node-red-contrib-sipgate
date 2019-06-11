@@ -34,7 +34,8 @@ module.exports = function(RED) {
         root.att('onAnswer', node.onAnswer);
       }
       msg.payload = xml.end({ pretty: true, indent: '    ' });
-      node.send(msg);
+      msg.res._res.set('Content-Type', 'application/xml');
+      msg.res._res.status(200).send(msg.payload);
     });
   }
   RED.nodes.registerType("dial", DialNode);
