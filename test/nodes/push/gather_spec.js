@@ -89,4 +89,8 @@ describe('gather node', function() {
       n1.receive({ payload: '<call data>', res: res });
     });
   });
+
+  it('should create onData endpoint');
+  it('should remove onData endpoint on close');
+  it('should send received onData payload to the next node');
 });
