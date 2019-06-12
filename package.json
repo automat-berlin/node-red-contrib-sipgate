@@ -8,7 +8,9 @@
       "play": "nodes/push/play.js",
       "gather": "nodes/push/gather.js",
       "dial": "nodes/push/dial.js",
-      "webhook": "nodes/push/webhook.js"
+      "webhook": "nodes/push/webhook.js",
+      "account": "nodes/config/account.js",
+      "hangup-call": "nodes/rtcm/hangup-call.js"
     }
   },
   "dependencies": {
