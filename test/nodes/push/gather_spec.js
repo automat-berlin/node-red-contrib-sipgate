@@ -25,8 +25,9 @@ describe('gather node', function() {
     var xml = fs.readFileSync('test/resources/xml/gather.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -38,8 +39,9 @@ describe('gather node', function() {
     var xml = fs.readFileSync('test/resources/xml/gather_maxDigits.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -51,8 +53,9 @@ describe('gather node', function() {
     var xml = fs.readFileSync('test/resources/xml/gather_timeout.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -64,8 +67,9 @@ describe('gather node', function() {
     var xml = fs.readFileSync('test/resources/xml/gather_onHangup.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -77,11 +81,16 @@ describe('gather node', function() {
     var xml = fs.readFileSync('test/resources/xml/gather_playUrl.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
     });
   });
+
+  it('should create onData endpoint');
+  it('should remove onData endpoint on close');
+  it('should send received onData payload to the next node');
 });

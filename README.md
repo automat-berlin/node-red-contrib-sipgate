@@ -12,6 +12,25 @@ cd ~/.node-red/
 npm install <path-to-cloned-repository>
 ```
 
+## Configuration
+
+You should be aware how to configure Node-RED ([read the docs here](https://nodered.org/docs/configuration)).
+
+Following instructions assume that you are using settings.js file for configuration.
+
+### Set baseUrl for callbacks
+
+The base URL will be used to create absolute URLs for callbacks (onData, onAnswer, onHangup) required by sipgate.io Push API.
+
+Find `functionGlobalContext` object and add `baseUrl` property with the base URL of your Node-RED deployment.
+```
+    ...
+    functionGlobalContext: {
+        baseUrl: 'http://example.com'
+    },
+    ...
+```
+
 ## Tests
 
 First go to the repository and install all dependencies:
