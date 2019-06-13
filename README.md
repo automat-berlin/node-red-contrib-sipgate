@@ -6,7 +6,7 @@ This repository contains a collection of nodes which implements [sipgate.io API]
 
 First clone this repository. Optionally switch to the desired branch.
 
-Next, go to the Node-RED directory, typically `~/.node-red` and install there the cloned package.
+Next, go to the Node-RED install directory, typically `~/.node-red` and install there the cloned package.
 ```
 cd ~/.node-red/
 npm install <path-to-cloned-repository>
@@ -16,7 +16,7 @@ npm install <path-to-cloned-repository>
 
 You should be aware how to configure Node-RED ([read the docs here](https://nodered.org/docs/configuration)).
 
-Following instructions assume that you are using settings.js file for configuration.
+Following instructions assume that you are using `settings.js` file for configuration (found in the user directory or specified with `-s` command line argument).
 
 ### Set baseUrl for callbacks
 
@@ -33,7 +33,7 @@ Find `functionGlobalContext` object and add `baseUrl` property with the base URL
 
 ## Tests
 
-First go to the repository and install all dependencies:
+First go to the repositories' main directory and install all dependencies:
 ```
 npm install
 ```
