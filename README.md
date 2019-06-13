@@ -33,7 +33,7 @@ Find `functionGlobalContext` object and add `baseUrl` property with the base URL
 
 ## Tests
 
-First go to the repositories' main directory and install all dependencies:
+First, go to the repository's main directory and install all dependencies:
 ```
 npm install
 ```
