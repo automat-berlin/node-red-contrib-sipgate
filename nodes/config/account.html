@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  RED.nodes.registerType('account', {
+    category: 'config',
+    defaults: {
+      name: { value: '', required: true }
+    },
+    credentials: {
+      email: { type: 'text' },
+      password: { type: 'password' }
+    },
+    label: function() {
+      return this.name || '<unnamed account>';
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="account">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-email"><i class="fa fa-user"></i> Email</label>
+    <input type="text" id="node-config-input-email" placeholder="Email">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-password"><i class="fa fa-key"></i> Password</label>
+    <input type="password" id="node-config-input-password" placeholder="Password">
+  </div>
+</script>

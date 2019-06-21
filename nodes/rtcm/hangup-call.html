@@ -1,0 +1,37 @@
+<script type="text/javascript">
+  RED.nodes.registerType('hangup-call', {
+    category: 'sipgate_RTCM_API',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      account: { value: '', type: 'account' }
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'sipgate.png',
+    label: function() {
+      return this.name || 'hangup-call';
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="hangup-call">
+  <div class="form-row">
+    <label for="node-input-account"><i class="fa fa-user"></i> Account</label>
+    <input type="text" id="node-input-account">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="hangup-call">
+  <p>Terminate a running call.</p>
+
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+      <dt>callId<span class="property-type">string</span></dt>
+      <dd>This property should be present in a message payload.</dd>
+  </dl>
+</script>
