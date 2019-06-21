@@ -17,6 +17,7 @@
     "xmlbuilder": "^13.0.1"
   },
   "devDependencies": {
+    "nock": "^10.0.6",
     "node-red": "^0.20.5",
     "node-red-node-test-helper": "^0.2.2"
   },
