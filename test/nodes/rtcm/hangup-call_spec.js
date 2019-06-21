@@ -35,10 +35,10 @@ describe('hangup-call node', function() {
       var n1 = helper.getNode('n1');
       n2.credentials = { email: 'login@example.com', password: 'test1234' };
       n1.on('input', function(msg) {
-        setTimeout(function() {
-          scope.done();
-          done();
-        }, 10);
+        done();
+      });
+      n1.on('close', function() {
+        scope.done();
       });
       n1.receive({ payload: { callId: '123456' } });
     });
