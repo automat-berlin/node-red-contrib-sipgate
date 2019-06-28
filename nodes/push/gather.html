@@ -7,20 +7,45 @@
       maxDigits: { value: "1" },
       timeout: { value: "2000" },
       playUrl: { value: "" },
-      onHangup: { value: "" }
+      onAnswer: { value: "" },
+      onHangup: { value: "" },
+      outputs: { value: 1 }
     },
     inputs: 1,
     outputs: 1,
+    outputLabels: ['dtmf', 'answer', 'hangup'],
     icon: "sipgate.png",
     label: function() {
       return this.name || "gather";
+    },
+    oneditprepare: function() {
+      var id = 1;
+      ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
+        var callbackOutput = $(selector);
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        callbackOutput.data('sourcePort', sourcePort);
+      });
+    },
+    oneditsave: function() {
+      var outputMap = {};
+      var id = 0;
+      outputMap['0'] = id++;
+      ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector) {
+        var callbackOutput = $(selector);
+        var sourcePort = callbackOutput.data('sourcePort');
+        var port = callbackOutput.prop('checked') ? id++ : -1;
+        if (sourcePort < 10 || port != -1) {
+          outputMap[sourcePort] = port;
+        }
+      });
+      $('#node-input-outputs').val(JSON.stringify(outputMap));
     }
   });
 </script>
 
 <script type="text/x-red" data-template-name="gather">
   <div class="form-row">
-    <label for="node-input-maxDigits"><i class="fa fa-tag"></i> maxDigits</label>
+    <label for="node-input-maxDigits"><i class="fa fa-gear"></i> maxDigits</label>
     <input type="text" id="node-input-maxDigits" placeholder="maxDigits (default: 1)">
   </div>
   <div class="form-row">
@@ -32,13 +57,18 @@
     <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
   </div>
   <div class="form-row">
-    <label for="node-input-onHangup"><i class="fa fa-globe"></i> onHangup</label>
-    <input type="text" id="node-input-onHangup" placeholder="onHangup callback URL">
+    <label for="node-input-onAnswer"><i class="fa fa-phone"></i> onAnswer</label>
+    <input type="checkbox" id="node-input-onAnswer">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onHangup"><i class="fa fa-ban"></i> onHangup</label>
+    <input type="checkbox" id="node-input-onHangup">
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
+  <input type="hidden" id="node-input-outputs" />
 </script>
 
 <script type="text/x-red" data-help-name="gather">

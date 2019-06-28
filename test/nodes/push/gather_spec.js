@@ -21,13 +21,13 @@ describe('gather node', function() {
   shared.shouldLoadCorrectly(gatherNode, "gather");
 
   it('should respond with proper XML', function(done) {
-    var flow = [{ id: "n1", type: "gather", onData: "http://example.com/dtmf" }];
+    var flow = [{ id: "n1", type: "gather" }];
     var xml = fs.readFileSync('test/resources/xml/gather.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
       n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
+        should(msg.res._res.responseBody).be.eql(xml.replace('${callbackUrl}', n1.callbackUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -35,13 +35,13 @@ describe('gather node', function() {
   });
 
   it('should respond with proper XML for custom maxDigits value', function(done) {
-    var flow = [{ id: "n1", type: "gather", onData: "http://example.com/dtmf", maxDigits: 3 }];
+    var flow = [{ id: "n1", type: "gather", maxDigits: 3 }];
     var xml = fs.readFileSync('test/resources/xml/gather_maxDigits.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
       n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
+        should(msg.res._res.responseBody).be.eql(xml.replace('${callbackUrl}', n1.callbackUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -49,27 +49,27 @@ describe('gather node', function() {
   });
 
   it('should respond with proper XML for custom timeout value', function(done) {
-    var flow = [{ id: "n1", type: "gather", onData: "http://example.com/dtmf", timeout: 10000 }];
+    var flow = [{ id: "n1", type: "gather", timeout: 10000 }];
     var xml = fs.readFileSync('test/resources/xml/gather_timeout.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
       n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
+        should(msg.res._res.responseBody).be.eql(xml.replace('${callbackUrl}', n1.callbackUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
     });
   });
 
-  it('should respond with proper XML for onHangup callback', function(done) {
-    var flow = [{ id: "n1", type: "gather", onData: "http://example.com/dtmf", onHangup: "http://example.com/callback" }];
-    var xml = fs.readFileSync('test/resources/xml/gather_onHangup.xml', 'utf8');
+  it('should respond with proper XML for onAnswer and onHangup callbacks', function(done) {
+    var flow = [{ id: "n1", type: "gather", onAnswer: true, onHangup: true }];
+    var xml = fs.readFileSync('test/resources/xml/gather_callbacks.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
       n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
+        should(msg.res._res.responseBody).be.eql(xml.replace(/\${callbackUrl}/g, n1.callbackUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -77,20 +77,20 @@ describe('gather node', function() {
   });
 
   it('should respond with proper XML for playUrl', function(done) {
-    var flow = [{ id: "n1", type: "gather", onData: "http://example.com/dtmf", playUrl: "http://example.com/example.wav" }];
+    var flow = [{ id: "n1", type: "gather", playUrl: "http://example.com/example.wav" }];
     var xml = fs.readFileSync('test/resources/xml/gather_playUrl.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode("n1");
       n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml.replace('${onData}', n1.onData));
+        should(msg.res._res.responseBody).be.eql(xml.replace('${callbackUrl}', n1.callbackUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
     });
   });
 
-  it('should create onData endpoint');
-  it('should remove onData endpoint on close');
-  it('should send received onData payload to the next node');
+  it('should create callback endpoint');
+  it('should remove callback endpoint on close');
+  it('should send received callback payload to the next node');
 });

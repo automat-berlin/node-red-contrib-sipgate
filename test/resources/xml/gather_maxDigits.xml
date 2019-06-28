@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Gather onData="http://example.com${onData}" maxDigits="3" timeout="2000"/>
+    <Gather onData="http://example.com${callbackUrl}" maxDigits="3" timeout="2000"/>
 </Response>

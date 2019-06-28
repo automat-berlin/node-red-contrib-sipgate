@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Response onHangup="http://example.com/callback">
-    <Gather onData="http://example.com${onData}" maxDigits="1" timeout="2000"/>
-</Response>
