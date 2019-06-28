@@ -5,13 +5,37 @@
     defaults: {
       name: { value: "" },
       url: { value: "", required: true },
-      onHangup: { value: "" }
+      onAnswer: { value: "" },
+      onHangup: { value: "" },
+      outputs: { value: 0 }
     },
     inputs: 1,
     outputs: 0,
+    outputLabels: ['answer', 'hangup'],
     icon: "sipgate.png",
     label: function() {
       return this.name || "play";
+    },
+    oneditprepare: function() {
+      var id = 0;
+      ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
+        var callbackOutput = $(selector);
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        callbackOutput.data('sourcePort', sourcePort);
+      });
+    },
+    oneditsave: function() {
+      var outputMap = {};
+      var id = 0;
+      ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector) {
+        var callbackOutput = $(selector);
+        var sourcePort = callbackOutput.data('sourcePort');
+        var port = callbackOutput.prop('checked') ? id++ : -1;
+        if (sourcePort < 10 || port != -1) {
+          outputMap[sourcePort] = port;
+        }
+      });
+      $('#node-input-outputs').val(JSON.stringify(outputMap));
     }
   });
 </script>
@@ -22,13 +46,18 @@
     <input type="text" id="node-input-url" placeholder="Sound file URL">
   </div>
   <div class="form-row">
-    <label for="node-input-onHangup"><i class="fa fa-globe"></i> onHangup</label>
-    <input type="text" id="node-input-onHangup" placeholder="onHangup callback URL">
+    <label for="node-input-onAnswer"><i class="fa fa-phone"></i> onAnswer</label>
+    <input type="checkbox" id="node-input-onAnswer">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onHangup"><i class="fa fa-ban"></i> onHangup</label>
+    <input type="checkbox" id="node-input-onHangup">
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
+  <input type="hidden" id="node-input-outputs" />
 </script>
 
 <script type="text/x-red" data-help-name="play">

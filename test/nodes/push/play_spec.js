@@ -25,6 +25,7 @@ describe('play node', function() {
     var xml = fs.readFileSync('test/resources/xml/play.xml', 'utf8');
     helper.load(playNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
         should(msg.res._res.responseBody).be.eql(xml);
         done();
@@ -33,16 +34,21 @@ describe('play node', function() {
     });
   });
 
-  it('should respond with proper XML for onHangup callback', function(done) {
-    var flow = [{ id: "n1", type: "play", url: "http://example.com/example.wav", onHangup: "http://example.com/callback" }];
-    var xml = fs.readFileSync('test/resources/xml/play_onHangup.xml', 'utf8');
+  it('should respond with proper XML for onAnswer and onHangup callbacks', function(done) {
+    var flow = [{ id: "n1", type: "play", url: "http://example.com/example.wav", onAnswer: true, onHangup: true }];
+    var xml = fs.readFileSync('test/resources/xml/play_callbacks.xml', 'utf8');
     helper.load(playNode, flow, function() {
       var n1 = helper.getNode("n1");
+      n1.context().global.set('baseUrl', 'http://example.com');
       n1.on("input", function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace(/\${callbackUrl}/g, n1.callbackUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
     });
   });
+
+  it('should create callback endpoint');
+  it('should remove callback endpoint on close');
+  it('should send received callback payload to the next node');
 });
