@@ -61,5 +61,17 @@
 </script>
 
 <script type="text/x-red" data-help-name="play">
-  <p>Play a sound file</p>
+  <p>Play a given sound file.</p>
+  <p>Afterwards the call is delivered as it would have been without playing the sound file.</p>
+
+  <h3>Details</h3>
+  <p><code>onAnswer</code> and <code>onHangup</code> activates additional outputs for data received from sipgate.io when
+     <code>answer</code> or <code>hangup</code> events occur.</p>
+
+  <h4>Notes</h4>
+  <p>Currently the sound file needs to be a mono 16bit PCM WAV file with a sampling rate of 8kHz.</p>
+  <p>You can use conversion tools like the open source audio editor Audacity to convert any sound file to the correct
+     format.</p>
+  <p>Linux users might want to use mpg123 to convert the file:</p>
+  <pre>mpg123 --rate 8000 --mono -w output.wav input.mp3</pre>
 </script>

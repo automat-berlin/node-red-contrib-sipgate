@@ -72,5 +72,15 @@
 </script>
 
 <script type="text/x-red" data-help-name="gather">
-  <p>Collects digits that a caller enters with the telephone keypad</p>
+  <p>Collect digits entered with the telephone keypad.</p>
+
+  <h3>Details</h3>
+  <p><code>maxDigits</code> defines maximum number of digits collected in time period limited by <code>Timeout</code>
+     value.</p>
+  <p><code>Timeout</code> value is in miliseconds.</p>
+  <p><code>Sound URL</code> is optional. If provided then the sound file will start playing at the beginning of the
+     call. It will stop immediately after the first digit is received. The timeout starts after the sound has finished
+     playing.</p>
+  <p><code>onAnswer</code> and <code>onHangup</code> activates additional outputs for data received from sipgate.io when
+     <code>answer</code> or <code>hangup</code> events occur.</p>
 </script>

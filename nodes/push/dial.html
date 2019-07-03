@@ -147,5 +147,12 @@
 </script>
 
 <script type="text/x-red" data-help-name="dial">
-  <p>Send call to voicemail or external number</p>
+  <p>Send call to voicemail or external number(s).</p>
+
+  <h3>Details</h3>
+  <p>Incoming calls can be redirected to up to 5 numbers.</p>
+  <p><code>onAnswer</code> and <code>onHangup</code> activates additional outputs for data received from sipgate.io when
+     <code>answer</code> or <code>hangup</code> events occur.</p>
+  <p>When the call is answered, the resulting <code>answer</code> event reports the answering destination in a field
+     called <code>answeringNumber</code>.</p>
 </script>
