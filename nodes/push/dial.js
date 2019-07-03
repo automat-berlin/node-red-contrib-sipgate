@@ -10,6 +10,7 @@ module.exports = function(RED) {
     this.numbers = config.numbers;
     this.anonymous = config.anonymous;
     this.callerId = config.callerId;
+    this.playUrl = config.playUrl;
     this.onAnswer = config.onAnswer;
     this.onHangup = config.onHangup;
     this.outputs = config.outputs;
@@ -20,19 +21,22 @@ module.exports = function(RED) {
     node.on('input', function(msg) {
       var absoluteCallbackUrl = url.resolve(this.context().global.get('baseUrl'), node.callbackUrl);
       var root = xmlbuilder.create('Response').dec('1.0', 'UTF-8');
-      var xml = root.ele('Dial');
+      if (node.playUrl) {
+        root.ele('Play').ele('Url', {}, node.playUrl);
+      }
+      var dial_xml = root.ele('Dial');
       if (node.anonymous) {
-        xml.att('anonymous', true);
+        dial_xml.att('anonymous', true);
       }
       if (node.callerId) {
-        xml.att('callerId', node.callerId);
+        dial_xml.att('callerId', node.callerId);
       }
       if (node.target == 'number') {
         for (var number of node.numbers) {
-          xml.ele('Number', {}, number.number);
+          dial_xml.ele('Number', {}, number.number);
         }
       } else if (node.target == 'voicemail') {
-        xml.ele('Voicemail');
+        dial_xml.ele('Voicemail');
       }
       if (node.onAnswer) {
         root.att('onAnswer', absoluteCallbackUrl);
@@ -40,7 +44,7 @@ module.exports = function(RED) {
       if (node.onHangup) {
         root.att('onHangup', absoluteCallbackUrl);
       }
-      msg.payload = xml.end({ pretty: true, indent: '    ' });
+      msg.payload = root.end({ pretty: true, indent: '    ' });
       msg.res._res.set('Content-Type', 'application/xml');
       msg.res._res.status(200).send(msg.payload);
     });

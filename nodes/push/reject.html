@@ -4,7 +4,8 @@
     color: '#a6bbcf',
     defaults: {
       name: { value: "" },
-      reason: { value: "rejected" }
+      reason: { value: "rejected" },
+      playUrl: { value: "" }
     },
     inputs: 1,
     outputs: 0,
@@ -22,6 +23,10 @@
       <option value="rejected">Rejected</option>
       <option value="busy">Busy</option>
     </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-playUrl"><i class="fa fa-globe"></i> Sound URL</label>
+    <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>

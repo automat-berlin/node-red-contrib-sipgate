@@ -8,6 +8,7 @@
       anonymous: { value: "" },
       callerId: { value: "" },
       numbers: { value: [{ number: "" }] },
+      playUrl: { value: "" },
       onAnswer: { value: "" },
       onHangup: { value: "" },
       outputs: { value: 0 }
@@ -130,6 +131,10 @@
   <div class="form-row">
     <label for="node-input-callerId"><i class="fa fa-tag"></i> Caller ID</label>
     <input type="text" id="node-input-callerId" placeholder="Caller ID">
+  </div>
+  <div class="form-row">
+    <label for="node-input-playUrl"><i class="fa fa-globe"></i> Sound URL</label>
+    <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
   </div>
   <div class="form-row">
     <label for="node-input-onAnswer"><i class="fa fa-phone"></i> onAnswer</label>
