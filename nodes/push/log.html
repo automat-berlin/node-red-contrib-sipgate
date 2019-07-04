@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  RED.nodes.registerType('log', {
+    category: 'sipgate',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      onAnswer: { value: true },
+      onHangup: { value: true },
+      outputs: { value: 2 }
+    },
+    inputs: 1,
+    outputs: 2,
+    outputLabels: ['answer', 'hangup'],
+    icon: 'sipgate.png',
+    label: function() {
+      return this.name || 'log';
+    },
+    oneditprepare: function() {
+      var id = 0;
+      ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
+        var callbackOutput = $(selector);
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        callbackOutput.data('sourcePort', sourcePort);
+      });
+    },
+    oneditsave: function() {
+      var outputMap = {};
+      var id = 0;
+      ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector) {
+        var callbackOutput = $(selector);
+        var sourcePort = callbackOutput.data('sourcePort');
+        var port = callbackOutput.prop('checked') ? id++ : -1;
+        if (sourcePort < 10 || port != -1) {
+          outputMap[sourcePort] = port;
+        }
+      });
+      $('#node-input-outputs').val(JSON.stringify(outputMap));
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="log">
+  <div class="form-row">
+    <label for="node-input-onAnswer"><i class="fa fa-phone"></i> onAnswer</label>
+    <input type="checkbox" id="node-input-onAnswer">
+  </div>
+  <div class="form-row">
+    <label for="node-input-onHangup"><i class="fa fa-ban"></i> onHangup</label>
+    <input type="checkbox" id="node-input-onHangup">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <input type="hidden" id="node-input-outputs" />
+</script>
+
+<script type="text/x-red" data-help-name="log">
+  <p>Log answer and hangup events.</p>
+
+  <h3>Details</h3>
+  <p><code>onAnswer</code> and <code>onHangup</code> activates additional outputs for data received from sipgate.io when
+     <code>answer</code> or <code>hangup</code> events occur.</p>
+</script>

@@ -9,6 +9,7 @@
       "gather": "nodes/push/gather.js",
       "dial": "nodes/push/dial.js",
       "webhook": "nodes/push/webhook.js",
+      "log": "nodes/push/log.js",
       "account": "nodes/config/account.js",
       "hangup-call": "nodes/rtcm/hangup-call.js"
     }
