@@ -13,7 +13,12 @@
     },
     inputs: 1,
     outputs: 1,
-    outputLabels: ['dtmf', 'answer', 'hangup'],
+    outputLabels: function(index) {
+      if (index == 0) {
+        return 'dtmf';
+      }
+      return (index == this.outputs-1 && this.onHangup) ? 'hangup' : 'answer';
+    },
     icon: "sipgate.png",
     label: function() {
       return this.name || "gather";

@@ -11,7 +11,9 @@
     },
     inputs: 1,
     outputs: 0,
-    outputLabels: ['answer', 'hangup'],
+    outputLabels: function(index) {
+      return (index == this.outputs-1 && this.onHangup) ? 'hangup' : 'answer';
+    },
     icon: "sipgate.png",
     label: function() {
       return this.name || "play";
