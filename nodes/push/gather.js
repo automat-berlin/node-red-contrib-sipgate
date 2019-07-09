@@ -51,6 +51,9 @@ module.exports = function(RED) {
       (req.body.event == 'dtmf') ? envelope.push(msg) : envelope.push(null);
       (req.body.event == 'answer' && node.onAnswer) ? envelope.push(msg) : envelope.push(null);
       (req.body.event == 'hangup' && node.onHangup) ? envelope.push(msg) : envelope.push(null);
+      if (req.body.event != 'dtmf') {
+        res.sendStatus(200);
+      }
       node.send(envelope);
     };
 

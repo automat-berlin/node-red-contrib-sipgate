@@ -45,6 +45,7 @@ module.exports = function(RED) {
       var envelope = [];
       (req.body.event == 'answer' && node.onAnswer) ? envelope.push(msg) : envelope.push(null);
       (req.body.event == 'hangup' && node.onHangup) ? envelope.push(msg) : envelope.push(null);
+      res.sendStatus(200);
       node.send(envelope);
     };
 
