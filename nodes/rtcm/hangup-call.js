@@ -15,7 +15,11 @@ module.exports = function(RED) {
       opts.headers = {};
       opts.headers['Authorization'] = 'Basic ' + credentialString;
       opts.headers['Content-Type'] = 'application/json';
-      request(opts);
+      request(opts, function (error, response, body) {
+        if (response && response.statusCode == 404) {
+          node.warn('Call with callId ' + msg.payload.callId + ' not found.');
+        }
+      });
     });
   }
   RED.nodes.registerType('hangup-call', HangupCallNode);

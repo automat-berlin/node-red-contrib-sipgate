@@ -43,4 +43,26 @@ describe('hangup-call node', function() {
       n1.receive({ payload: { callId: '123456' } });
     });
   });
+
+  it('should warn if call not found', function(done) {
+    var flow = [
+      { id: 'n1', type: 'hangup-call', account: 'n2' },
+      { id: 'n2', type: 'account', name: 'test' }
+    ];
+    var testNodes = [hangupCallNode, accountNode];
+    var scope = nock('https://api.sipgate.com')
+      .delete('/v2/calls/111111')
+      .reply(404);
+
+    helper.load(testNodes, flow, function() {
+      var n2 = helper.getNode('n2');
+      var n1 = helper.getNode('n1');
+      n2.credentials = { email: 'login@example.com', password: 'test1234' };
+      n1.on('call:warn', function(call) {
+        call.should.be.calledWithExactly('Call with callId 111111 not found.');
+        done();
+      });
+      n1.receive({ payload: { callId: '111111' } });
+    });
+  });
 });
