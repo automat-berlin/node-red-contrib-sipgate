@@ -7,7 +7,12 @@
       target: { value: "number", required: true },
       anonymous: { value: "" },
       callerId: { value: "" },
-      numbers: { value: [{ number: "" }] },
+      numbers: { value: [{ number: "" }], validate: function(v) {
+        for (var i = 0; i < v.length; i++) {
+          if (!/^[0-9]+$/.test(v[i].number)) return false;
+        }
+        return !!v.length;
+      } },
       playUrl: { value: "" },
       onAnswer: { value: "" },
       onHangup: { value: "" },
@@ -38,6 +43,14 @@
         number.find('.red-ui-typedInput').typedInput("width", newWidth);
       }
 
+      function validateNumbers() {
+        if (container.editableList('length') > 0) {
+          $('#node-input-numbers-container').parent().removeClass('input-error');
+        } else {
+          $('#node-input-numbers-container').parent().addClass('input-error');
+        }
+      }
+
       $("#node-input-target").change(function(e) {
         var val = $(this).val();
         $(".node-row-numbers").toggle(val === "number");
@@ -54,17 +67,29 @@
             type: "text",
             style: "margin-left: 5px;"
           }).appendTo(row)
-          .typedInput({ default: 'num', types: ['num'] });
+          .typedInput({
+            default: 'num',
+            types: [{
+              value: 'num',
+              label: 'number',
+              icon: 'red/images/typedInput/09.png',
+              validate: /^[0-9]+$/
+            }]
+          });
           valueField.typedInput('value', opt.number);
           resizeNumbers(container);
+          validateNumbers();
         },
         resizeItem: resizeNumbers,
-        removable: true
+        removable: true,
+        removeItem: validateNumbers
       });
 
       for (var i = 0; i < node.numbers.length; i++) {
         container.editableList('addItem', node.numbers[i]);
       }
+
+      validateNumbers();
     },
     oneditsave: function() {
       var outputMap = {};
