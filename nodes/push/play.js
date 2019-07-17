@@ -1,5 +1,5 @@
 module.exports = function(RED) {
-  "use strict";
+  'use strict';
   var xmlbuilder = require('xmlbuilder');
   var url = require('url');
   var bodyParser = require('body-parser');
@@ -33,7 +33,7 @@ module.exports = function(RED) {
       return Math.floor(Math.random() * 1000000);
     }
 
-    this.errorHandler = function(err, req, res, next) {
+    this.errorHandler = function(err, req, res) {
       node.warn(err);
       res.sendStatus(500);
     };
@@ -63,5 +63,5 @@ module.exports = function(RED) {
       });
     });
   }
-  RED.nodes.registerType("play", PlayNode);
-}
+  RED.nodes.registerType('play', PlayNode);
+};

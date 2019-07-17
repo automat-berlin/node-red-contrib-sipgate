@@ -1,4 +1,3 @@
-var should = require('should');
 var helper = require('node-red-node-test-helper');
 var shared = require('../shared.js');
 var hangupCallNode = require('../../../nodes/rtcm/hangup-call.js');
@@ -34,7 +33,7 @@ describe('hangup-call node', function() {
       var n2 = helper.getNode('n2');
       var n1 = helper.getNode('n1');
       n2.credentials = { email: 'login@example.com', password: 'test1234' };
-      n1.on('input', function(msg) {
+      n1.on('input', function() {
         done();
       });
       n1.on('close', function() {
@@ -50,7 +49,7 @@ describe('hangup-call node', function() {
       { id: 'n2', type: 'account', name: 'test' }
     ];
     var testNodes = [hangupCallNode, accountNode];
-    var scope = nock('https://api.sipgate.com')
+    nock('https://api.sipgate.com')
       .delete('/v2/calls/111111')
       .reply(404);
 

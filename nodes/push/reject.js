@@ -1,10 +1,10 @@
 module.exports = function(RED) {
-  "use strict";
+  'use strict';
   var xmlbuilder = require('xmlbuilder');
 
   function RejectNode(config) {
     RED.nodes.createNode(this, config);
-    this.reason = config.reason || "rejected";
+    this.reason = config.reason || 'rejected';
     this.playUrl = config.playUrl;
     var node = this;
 
@@ -19,5 +19,5 @@ module.exports = function(RED) {
       msg.res._res.status(200).send(msg.payload);
     });
   }
-  RED.nodes.registerType("reject", RejectNode);
-}
+  RED.nodes.registerType('reject', RejectNode);
+};

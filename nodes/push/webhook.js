@@ -16,7 +16,7 @@ module.exports = function(RED) {
 
     var node = this;
 
-    this.errorHandler = function(err, req, res, next) {
+    this.errorHandler = function(err, req, res) {
       node.warn(err);
       res.sendStatus(500);
     };
@@ -42,4 +42,4 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType('webhook', WebhookNode);
-}
+};

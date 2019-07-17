@@ -12,5 +12,5 @@ module.exports = function(RED) {
     var email = this.credentials.email;
     var password = this.credentials.password;
     return Buffer.from(email + ':' + password).toString('base64');
-  }
-}
+  };
+};

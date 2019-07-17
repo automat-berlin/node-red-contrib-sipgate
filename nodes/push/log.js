@@ -31,7 +31,7 @@ module.exports = function(RED) {
       return Math.floor(Math.random() * 1000000);
     }
 
-    this.errorHandler = function(err, req, res, next) {
+    this.errorHandler = function(err, req, res) {
       node.warn(err);
       res.sendStatus(500);
     };
@@ -62,4 +62,4 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType('log', LogNode);
-}
+};
