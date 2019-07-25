@@ -6,12 +6,12 @@
       name: { value: '' },
       onAnswer: { value: true },
       onHangup: { value: true },
-      outputs: { value: 2 }
+      outputs: { value: 2 },
     },
     inputs: 1,
     outputs: 2,
     outputLabels: function(index) {
-      return (index == this.outputs-1 && this.onHangup) ? 'hangup' : 'answer';
+      return index == this.outputs - 1 && this.onHangup ? 'hangup' : 'answer';
     },
     icon: 'sipgate.png',
     label: function() {
@@ -21,7 +21,7 @@
       var id = 0;
       ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
         var callbackOutput = $(selector);
-        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i + 10;
         callbackOutput.data('sourcePort', sourcePort);
       });
     },
@@ -37,7 +37,7 @@
         }
       });
       $('#node-input-outputs').val(JSON.stringify(outputMap));
-    }
+    },
   });
 </script>
 

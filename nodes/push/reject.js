@@ -13,7 +13,7 @@ module.exports = function(RED) {
       if (node.playUrl) {
         root.ele('Play').ele('Url', {}, node.playUrl);
       }
-      root.ele('Reject', { 'reason': node.reason });
+      root.ele('Reject', { reason: node.reason });
       msg.payload = root.end({ pretty: true, indent: '    ' });
       msg.res._res.set('Content-Type', 'application/xml');
       msg.res._res.status(200).send(msg.payload);

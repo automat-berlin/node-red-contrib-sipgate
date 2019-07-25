@@ -5,7 +5,6 @@ var webhookNode = require('../../../nodes/push/webhook.js');
 helper.init(require.resolve('node-red'));
 
 describe('webhook node', function() {
-
   beforeEach(function(done) {
     helper.startServer(done);
   });

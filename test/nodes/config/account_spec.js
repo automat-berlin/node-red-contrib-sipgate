@@ -6,7 +6,6 @@ var accountNode = require('../../../nodes/config/account.js');
 helper.init(require.resolve('node-red'));
 
 describe('account config node', function() {
-
   beforeEach(function(done) {
     helper.startServer(done);
   });

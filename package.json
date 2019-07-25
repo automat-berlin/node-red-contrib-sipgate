@@ -21,9 +21,11 @@
     "eslint": "^6.0.1",
     "nock": "^10.0.6",
     "node-red": "^0.20.5",
-    "node-red-node-test-helper": "^0.2.2"
+    "node-red-node-test-helper": "^0.2.2",
+    "prettier": "1.18.2"
   },
   "scripts": {
+    "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
     "test": "mocha \"test/**/*_spec.js\""
   }

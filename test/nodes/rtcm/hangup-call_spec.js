@@ -7,7 +7,6 @@ var nock = require('nock');
 helper.init(require.resolve('node-red'));
 
 describe('hangup-call node', function() {
-
   beforeEach(function(done) {
     helper.startServer(done);
   });
@@ -20,10 +19,7 @@ describe('hangup-call node', function() {
   shared.shouldLoadCorrectly(hangupCallNode, 'hangup-call');
 
   it('should make a proper request to sipgate', function(done) {
-    var flow = [
-      { id: 'n1', type: 'hangup-call', account: 'n2' },
-      { id: 'n2', type: 'account', name: 'test' }
-    ];
+    var flow = [{ id: 'n1', type: 'hangup-call', account: 'n2' }, { id: 'n2', type: 'account', name: 'test' }];
     var testNodes = [hangupCallNode, accountNode];
     var scope = nock('https://api.sipgate.com')
       .delete('/v2/calls/123456')
@@ -44,10 +40,7 @@ describe('hangup-call node', function() {
   });
 
   it('should warn if call not found', function(done) {
-    var flow = [
-      { id: 'n1', type: 'hangup-call', account: 'n2' },
-      { id: 'n2', type: 'account', name: 'test' }
-    ];
+    var flow = [{ id: 'n1', type: 'hangup-call', account: 'n2' }, { id: 'n2', type: 'account', name: 'test' }];
     var testNodes = [hangupCallNode, accountNode];
     nock('https://api.sipgate.com')
       .delete('/v2/calls/111111')

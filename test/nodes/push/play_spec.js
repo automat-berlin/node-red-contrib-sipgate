@@ -8,7 +8,6 @@ var fs = require('fs');
 helper.init(require.resolve('node-red'));
 
 describe('play node', function() {
-
   beforeEach(function(done) {
     helper.startServer(done);
   });

@@ -8,7 +8,6 @@ var fs = require('fs');
 helper.init(require.resolve('node-red'));
 
 describe('dial node', function() {
-
   beforeEach(function(done) {
     helper.startServer(done);
   });
@@ -63,7 +62,9 @@ describe('dial node', function() {
   });
 
   it('should respond with proper XML for target number and callerId', function(done) {
-    var flow = [{ id: 'n1', type: 'dial', target: 'number', numbers: [{ number: '4915799912345' }], callerId: '492111234567' }];
+    var flow = [
+      { id: 'n1', type: 'dial', target: 'number', numbers: [{ number: '4915799912345' }], callerId: '492111234567' },
+    ];
     var xml = fs.readFileSync('test/resources/xml/dial_callerId.xml', 'utf8');
     helper.load(dialNode, flow, function() {
       var n1 = helper.getNode('n1');
@@ -77,7 +78,9 @@ describe('dial node', function() {
   });
 
   it('should respond with proper XML for target number and two numbers', function(done) {
-    var flow = [{ id: 'n1', type: 'dial', target: 'number', numbers: [{ number: '4915799912345' }, { number: '492111234567' }] }];
+    var flow = [
+      { id: 'n1', type: 'dial', target: 'number', numbers: [{ number: '4915799912345' }, { number: '492111234567' }] },
+    ];
     var xml = fs.readFileSync('test/resources/xml/dial_two_numbers.xml', 'utf8');
     helper.load(dialNode, flow, function() {
       var n1 = helper.getNode('n1');
@@ -91,7 +94,16 @@ describe('dial node', function() {
   });
 
   it('should respond with proper XML for target number and onAnswer/onHangup callbacks', function(done) {
-    var flow = [{ id: 'n1', type: 'dial', target: 'number', numbers: [{ number: '4915799912345' }], onAnswer: true, onHangup: true }];
+    var flow = [
+      {
+        id: 'n1',
+        type: 'dial',
+        target: 'number',
+        numbers: [{ number: '4915799912345' }],
+        onAnswer: true,
+        onHangup: true,
+      },
+    ];
     var xml = fs.readFileSync('test/resources/xml/dial_number_callbacks.xml', 'utf8');
     helper.load(dialNode, flow, function() {
       var n1 = helper.getNode('n1');
@@ -105,7 +117,15 @@ describe('dial node', function() {
   });
 
   it('should respond with proper XML when sound URL is provided', function(done) {
-    var flow = [{ id: 'n1', type: 'dial', target: 'number', numbers: [{ number: '4915799912345' }], playUrl: 'http://example.com/example.wav' }];
+    var flow = [
+      {
+        id: 'n1',
+        type: 'dial',
+        target: 'number',
+        numbers: [{ number: '4915799912345' }],
+        playUrl: 'http://example.com/example.wav',
+      },
+    ];
     var xml = fs.readFileSync('test/resources/xml/dial_playUrl.xml', 'utf8');
     helper.load(dialNode, flow, function() {
       var n1 = helper.getNode('n1');

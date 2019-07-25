@@ -1,0 +1,6 @@
+*.png
+*.xml
+.DS_Store
+.gitignore
+.prettierignore
+LICENSE

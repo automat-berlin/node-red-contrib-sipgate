@@ -19,7 +19,7 @@ module.exports = function(RED) {
     node.on('input', function(msg) {
       var absoluteCallbackUrl = url.resolve(this.context().global.get('baseUrl'), node.callbackUrl);
       var root = xmlbuilder.create('Response').dec('1.0', 'UTF-8');
-      var xml = root.ele('Gather', { 'onData': absoluteCallbackUrl, 'maxDigits': node.maxDigits, 'timeout': node.timeout });
+      var xml = root.ele('Gather', { onData: absoluteCallbackUrl, maxDigits: node.maxDigits, timeout: node.timeout });
       if (node.playUrl) {
         xml.ele('Play').ele('Url', {}, node.playUrl);
       }
@@ -48,9 +48,9 @@ module.exports = function(RED) {
       res._msgid = msgid;
       var msg = { _msgid: msgid, req: req, res: { _res: res }, payload: req.body };
       var envelope = [];
-      (req.body.event == 'dtmf') ? envelope.push(msg) : envelope.push(null);
-      (req.body.event == 'answer' && node.onAnswer) ? envelope.push(msg) : envelope.push(null);
-      (req.body.event == 'hangup' && node.onHangup) ? envelope.push(msg) : envelope.push(null);
+      req.body.event == 'dtmf' ? envelope.push(msg) : envelope.push(null);
+      req.body.event == 'answer' && node.onAnswer ? envelope.push(msg) : envelope.push(null);
+      req.body.event == 'hangup' && node.onHangup ? envelope.push(msg) : envelope.push(null);
       if (req.body.event != 'dtmf') {
         res.sendStatus(200);
       }

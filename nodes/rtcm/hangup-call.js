@@ -15,7 +15,7 @@ module.exports = function(RED) {
       opts.headers = {};
       opts.headers['Authorization'] = 'Basic ' + credentialString;
       opts.headers['Content-Type'] = 'application/json';
-      request(opts, function (error, response) {
+      request(opts, function(error, response) {
         if (response && response.statusCode == 404) {
           node.warn('Call with callId ' + msg.payload.callId + ' not found.');
         }
