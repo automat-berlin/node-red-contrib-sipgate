@@ -2,6 +2,8 @@
 
 This repository contains a collection of nodes which implements [sipgate.io API](https://developer.sipgate.io).
 
+*This is a community project. sipgate is a registered trademark of sipgate GmbH in Germany and other countries. Automat Berlin GmbH as well as the initial authors of this module are not affiliated with, nor endorsed by, nor connected in any way to sipgate GmbH or any of their subsidiaries.*
+
 ## Installation
 
 First clone this repository. Optionally switch to the desired branch.
@@ -42,3 +44,17 @@ Then to run all tests use this command:
 ```
 npm test
 ```
+
+## Contribute
+
+We welcome any contributions. Contact us if you have any questions.
+
+## Contact
+
+This repository is owned and maintained by [Automat Berlin GmbH](https://automat.berlin/).
+
+sipgate is a trademark of sipgate GmbH in Germany and in other countries.
+
+## License
+
+The code in this repository is released under the MIT license. See [LICENSE](LICENSE) for details.
