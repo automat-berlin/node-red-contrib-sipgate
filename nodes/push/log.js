@@ -31,7 +31,7 @@ module.exports = function(RED) {
       return Math.floor(Math.random() * 1000000);
     }
 
-    this.errorHandler = function(err, req, res, next) {
+    this.errorHandler = function(err, req, res) {
       node.warn(err);
       res.sendStatus(500);
     };
@@ -41,8 +41,8 @@ module.exports = function(RED) {
       res._msgid = msgid;
       var msg = { _msgid: msgid, req: req, res: { _res: res }, payload: req.body };
       var envelope = [];
-      (req.body.event == 'answer' && node.onAnswer) ? envelope.push(msg) : envelope.push(null);
-      (req.body.event == 'hangup' && node.onHangup) ? envelope.push(msg) : envelope.push(null);
+      req.body.event == 'answer' && node.onAnswer ? envelope.push(msg) : envelope.push(null);
+      req.body.event == 'hangup' && node.onHangup ? envelope.push(msg) : envelope.push(null);
       res.sendStatus(200);
       node.send(envelope);
     };
@@ -62,4 +62,4 @@ module.exports = function(RED) {
     });
   }
   RED.nodes.registerType('log', LogNode);
-}
+};

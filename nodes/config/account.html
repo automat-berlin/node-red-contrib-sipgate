@@ -2,15 +2,15 @@
   RED.nodes.registerType('account', {
     category: 'config',
     defaults: {
-      name: { value: '', required: true }
+      name: { value: '', required: true },
     },
     credentials: {
       email: { type: 'text' },
-      password: { type: 'password' }
+      password: { type: 'password' },
     },
     label: function() {
       return this.name || '<unnamed account>';
-    }
+    },
   });
 </script>
 

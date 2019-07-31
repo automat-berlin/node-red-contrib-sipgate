@@ -3,86 +3,96 @@
     category: 'sipgate_Push_API',
     color: '#a6bbcf',
     defaults: {
-      name: { value: "" },
-      target: { value: "number", required: true },
-      anonymous: { value: "" },
-      callerId: { value: "" },
-      numbers: { value: [{ number: "" }], validate: function(v) {
-        for (var i = 0; i < v.length; i++) {
-          if (!/^[0-9]+$/.test(v[i].number)) return false;
-        }
-        return !!v.length;
-      } },
-      playUrl: { value: "" },
-      onAnswer: { value: "" },
-      onHangup: { value: "" },
-      outputs: { value: 0 }
+      name: { value: '' },
+      target: { value: 'number', required: true },
+      anonymous: { value: '' },
+      callerId: { value: '' },
+      numbers: {
+        value: [{ number: '' }],
+        validate: function(v) {
+          for (var i = 0; i < v.length; i++) {
+            if (!/^[0-9]+$/.test(v[i].number)) return false;
+          }
+          return !!v.length;
+        },
+      },
+      playUrl: { value: '' },
+      onAnswer: { value: '' },
+      onHangup: { value: '' },
+      outputs: { value: 0 },
     },
     inputs: 1,
     outputs: 0,
     outputLabels: function(index) {
-      return (index == this.outputs-1 && this.onHangup) ? 'hangup' : 'answer';
+      return index == this.outputs - 1 && this.onHangup ? 'hangup' : 'answer';
     },
-    icon: "sipgate.png",
+    icon: 'sipgate.png',
     label: function() {
-      return this.name || "dial";
+      return this.name || 'dial';
     },
     oneditprepare: function() {
       var id = 0;
       ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
         var callbackOutput = $(selector);
-        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i + 10;
         callbackOutput.data('sourcePort', sourcePort);
       });
 
       var node = this;
-      var container = $("#node-input-numbers-container");
+      var container = $('#node-input-numbers-container');
 
       function resizeNumbers(number) {
         var newWidth = number.width() - 15;
-        number.find('.red-ui-typedInput').typedInput("width", newWidth);
+        number.find('.red-ui-typedInput').typedInput('width', newWidth);
       }
 
       function validateNumbers() {
         if (container.editableList('length') > 0) {
-          $('#node-input-numbers-container').parent().removeClass('input-error');
+          $('#node-input-numbers-container')
+            .parent()
+            .removeClass('input-error');
         } else {
-          $('#node-input-numbers-container').parent().addClass('input-error');
+          $('#node-input-numbers-container')
+            .parent()
+            .addClass('input-error');
         }
       }
 
-      $("#node-input-target").change(function(e) {
+      $('#node-input-target').change(function(e) {
         var val = $(this).val();
-        $(".node-row-numbers").toggle(val === "number");
+        $('.node-row-numbers').toggle(val === 'number');
       });
 
       container.editableList({
         addItem: function(container, i, opt) {
           if (!opt.hasOwnProperty('number')) {
-            opt.number = "";
+            opt.number = '';
           }
           var row = $('<div/>').appendTo(container);
           var valueField = $('<input/>', {
-            class: "node-input-number-value",
-            type: "text",
-            style: "margin-left: 5px;"
-          }).appendTo(row)
-          .typedInput({
-            default: 'num',
-            types: [{
-              value: 'num',
-              label: 'number',
-              icon: 'red/images/typedInput/09.png',
-              validate: /^[0-9]+$/
-            }]
-          });
+            class: 'node-input-number-value',
+            type: 'text',
+            style: 'margin-left: 5px;',
+          })
+            .appendTo(row)
+            .typedInput({
+              default: 'num',
+              types: [
+                {
+                  value: 'num',
+                  label: 'number',
+                  icon: 'red/images/typedInput/09.png',
+                  validate: /^[0-9]+$/,
+                },
+              ],
+            });
           valueField.typedInput('value', opt.number);
           resizeNumbers(container);
           validateNumbers();
         },
         resizeItem: resizeNumbers,
         removable: true,
-        removeItem: validateNumbers
+        removeItem: validateNumbers,
       });
 
       for (var i = 0; i < node.numbers.length; i++) {
@@ -104,27 +114,27 @@
       });
       $('#node-input-outputs').val(JSON.stringify(outputMap));
 
-      var numbers = $("#node-input-numbers-container").editableList('items');
+      var numbers = $('#node-input-numbers-container').editableList('items');
       var node = this;
       node.numbers = [];
       numbers.each(function(i) {
         var number = $(this);
-        var vf = number.find(".node-input-number-value");
+        var vf = number.find('.node-input-number-value');
         var value = vf.typedInput('value');
         var r = { number: value };
         node.numbers.push(r);
       });
     },
     oneditresize: function(size) {
-      var rows = $("#dialog-form>div:not(.node-input-numbers-container-row)");
+      var rows = $('#dialog-form>div:not(.node-input-numbers-container-row)');
       var height = size.height;
       for (var i = 0; i < rows.size(); i++) {
         height -= $(rows[i]).outerHeight(true);
       }
-      var editorRow = $("#dialog-form>div.node-input-numbers-container-row");
-      height -= (parseInt(editorRow.css("marginTop")) + parseInt(editorRow.css("marginBottom")));
-      $("#node-input-numbers-container").editableList('height', height);
-    }
+      var editorRow = $('#dialog-form>div.node-input-numbers-container-row');
+      height -= parseInt(editorRow.css('marginTop')) + parseInt(editorRow.css('marginBottom'));
+      $('#node-input-numbers-container').editableList('height', height);
+    },
   });
 </script>
 

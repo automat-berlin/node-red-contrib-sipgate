@@ -3,13 +3,13 @@
     category: 'sipgate_Push_API',
     color: '#a6bbcf',
     defaults: {
-      name: { value: "" },
-      maxDigits: { value: "1" },
-      timeout: { value: "2000" },
-      playUrl: { value: "" },
-      onAnswer: { value: "" },
-      onHangup: { value: "" },
-      outputs: { value: 1 }
+      name: { value: '' },
+      maxDigits: { value: '1' },
+      timeout: { value: '2000' },
+      playUrl: { value: '' },
+      onAnswer: { value: '' },
+      onHangup: { value: '' },
+      outputs: { value: 1 },
     },
     inputs: 1,
     outputs: 1,
@@ -17,17 +17,17 @@
       if (index == 0) {
         return 'dtmf';
       }
-      return (index == this.outputs-1 && this.onHangup) ? 'hangup' : 'answer';
+      return index == this.outputs - 1 && this.onHangup ? 'hangup' : 'answer';
     },
-    icon: "sipgate.png",
+    icon: 'sipgate.png',
     label: function() {
-      return this.name || "gather";
+      return this.name || 'gather';
     },
     oneditprepare: function() {
       var id = 1;
       ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
         var callbackOutput = $(selector);
-        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i + 10;
         callbackOutput.data('sourcePort', sourcePort);
       });
     },
@@ -44,7 +44,7 @@
         }
       });
       $('#node-input-outputs').val(JSON.stringify(outputMap));
-    }
+    },
   });
 </script>
 

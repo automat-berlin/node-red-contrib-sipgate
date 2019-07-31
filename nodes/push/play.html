@@ -3,26 +3,26 @@
     category: 'sipgate_Push_API',
     color: '#a6bbcf',
     defaults: {
-      name: { value: "" },
-      url: { value: "", required: true },
-      onAnswer: { value: "" },
-      onHangup: { value: "" },
-      outputs: { value: 0 }
+      name: { value: '' },
+      url: { value: '', required: true },
+      onAnswer: { value: '' },
+      onHangup: { value: '' },
+      outputs: { value: 0 },
     },
     inputs: 1,
     outputs: 0,
     outputLabels: function(index) {
-      return (index == this.outputs-1 && this.onHangup) ? 'hangup' : 'answer';
+      return index == this.outputs - 1 && this.onHangup ? 'hangup' : 'answer';
     },
-    icon: "sipgate.png",
+    icon: 'sipgate.png',
     label: function() {
-      return this.name || "play";
+      return this.name || 'play';
     },
     oneditprepare: function() {
       var id = 0;
       ['#node-input-onAnswer', '#node-input-onHangup'].forEach(function(selector, i) {
         var callbackOutput = $(selector);
-        var sourcePort = callbackOutput.prop('checked') ? id++ : i+10;
+        var sourcePort = callbackOutput.prop('checked') ? id++ : i + 10;
         callbackOutput.data('sourcePort', sourcePort);
       });
     },
@@ -38,7 +38,7 @@
         }
       });
       $('#node-input-outputs').val(JSON.stringify(outputMap));
-    }
+    },
   });
 </script>
 

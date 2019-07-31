@@ -1,4 +1,3 @@
-var should = require('should');
 var helper = require('node-red-node-test-helper');
 var shared = require('../shared.js');
 var webhookNode = require('../../../nodes/push/webhook.js');
@@ -6,7 +5,6 @@ var webhookNode = require('../../../nodes/push/webhook.js');
 helper.init(require.resolve('node-red'));
 
 describe('webhook node', function() {
-
   beforeEach(function(done) {
     helper.startServer(done);
   });

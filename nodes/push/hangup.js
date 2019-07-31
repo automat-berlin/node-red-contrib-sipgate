@@ -1,5 +1,5 @@
 module.exports = function(RED) {
-  "use strict";
+  'use strict';
   var xmlbuilder = require('xmlbuilder');
 
   function HangupNode(config) {
@@ -18,5 +18,5 @@ module.exports = function(RED) {
       msg.res._res.status(200).send(msg.payload);
     });
   }
-  RED.nodes.registerType("hangup", HangupNode);
-}
+  RED.nodes.registerType('hangup', HangupNode);
+};
