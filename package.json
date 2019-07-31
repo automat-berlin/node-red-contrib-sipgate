@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "eslint": "^6.0.1",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
     "nock": "^10.0.6",
     "node-red": "^0.20.5",
     "node-red-node-test-helper": "^0.2.2",
@@ -28,5 +30,14 @@
     "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
     "test": "mocha \"test/**/*_spec.js\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{html,js,md}": ["prettier --list-different"],
+    ".": ["eslint"]
   }
 }
