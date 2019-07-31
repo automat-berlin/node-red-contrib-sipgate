@@ -49,9 +49,11 @@ Then to run all tests use this command:
 npm test
 ```
 
-## Contribute
+## Contributing
 
-We welcome any contributions. Contact us if you have any questions.
+We welcome all contributions. Please read our [contributing guidelines](CONTRIBUTING.md).
+
+Contact us if you have any questions via email info@automat.berlin or create an issue.
 
 ## Contact
 
