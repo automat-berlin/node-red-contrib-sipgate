@@ -1,6 +1,28 @@
 {
-  "name": "node-red-contrib-sipgate",
-  "version": "0.1.0",
+  "name": "@automat-berlin/node-red-contrib-sipgate",
+  "version": "1.0.0",
+  "description": "Node-RED nodes for sipgate.io that offer a convenient way to build communications applications (e.g. IVR, lookup dependent call routing) on top of the sipgate API.",
+  "homepage": "https://automat.berlin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/automat-berlin/node-red-contrib-sipgate"
+  },
+  "bugs": {
+    "url": "https://github.com/automat-berlin/node-red-contrib-sipgate/issues",
+    "email": "info@automat.berlin"
+  },
+  "license": "MIT",
+  "keywords": [
+    "automat.berlin",
+    "call",
+    "IVR",
+    "node-red",
+    "RTCM",
+    "sipgate",
+    "sipgate.io",
+    "voice",
+    "voip"
+  ],
   "node-red": {
     "nodes": {
       "hangup": "nodes/push/hangup.js",
@@ -14,6 +36,9 @@
       "hangup-call": "nodes/rtcm/hangup-call.js"
     }
   },
+  "files": [
+    "nodes"
+  ],
   "dependencies": {
     "xmlbuilder": "^13.0.1"
   },
@@ -37,7 +62,11 @@
     }
   },
   "lint-staged": {
-    "**/*.{html,js,md}": ["prettier --list-different"],
-    ".": ["eslint"]
+    "**/*.{html,js,md}": [
+      "prettier --list-different"
+    ],
+    ".": [
+      "eslint"
+    ]
   }
 }
