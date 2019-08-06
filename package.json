@@ -54,6 +54,7 @@
   "scripts": {
     "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
+    "start": "node node_modules/node-red/red.js",
     "test": "mocha \"test/**/*_spec.js\""
   },
   "husky": {
