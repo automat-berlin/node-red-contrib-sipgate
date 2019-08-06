@@ -16,4 +16,10 @@ module.exports = {
     'storage',
     'advanced',
   ],
+
+  // sets global context data
+  functionGlobalContext: {
+    // required to generate sipgate callbacks URLs
+    baseUrl: 'https://' + process.env.APP_NAME + '.herokuapp.com',
+  },
 };
