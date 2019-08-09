@@ -4,6 +4,12 @@ This repository contains a collection of nodes which implements [sipgate.io API]
 
 _This is a community project. sipgate is a registered trademark of sipgate GmbH in Germany and other countries. Automat Berlin GmbH as well as the initial authors of this module are not affiliated with, nor endorsed by, nor connected in any way to sipgate GmbH or any of their subsidiaries._
 
+## Quick start
+
+You can get hands-on experience with Node-RED and sipgate nodes by deploying them to [Heroku](https://www.heroku.com). You only need a free account (no credit card required).
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Installation
 
 Prerequisite: You need to have running Node-RED instance. If you don't have yet, read [Node-RED Getting Stared guide](https://nodered.org/docs/getting-started/).

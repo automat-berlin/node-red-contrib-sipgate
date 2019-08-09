@@ -1,0 +1,27 @@
+{
+  "name": "Node-RED nodes for sipgate.io",
+  "description": "Node-RED nodes for sipgate.io that offer a convenient way to build communications applications (e.g. IVR, lookup dependent call routing) on top of the sipgate API.",
+  "repository": "https://github.com/automat-berlin/node-red-contrib-sipgate",
+  "keywords": [
+    "automat.berlin",
+    "call",
+    "IVR",
+    "node-red",
+    "RTCM",
+    "sipgate",
+    "sipgate.io",
+    "voice",
+    "voip"
+  ],
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "DO NOT CHANGE. Leave \"false\" here.",
+      "value": "false",
+      "required": true
+    },
+    "APP_NAME": {
+      "description": "Repeat app name to make it available inside the app.",
+      "required": true
+    }
+  }
+}
