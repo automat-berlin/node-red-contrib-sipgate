@@ -1,0 +1,77 @@
+<script type="text/javascript">
+  RED.nodes.registerType('aws', {
+    category: 'config',
+    defaults: {
+      name: { value: '', required: true },
+      region: { value: '', required: true },
+      bucket: { value: '', required: true },
+    },
+    credentials: {
+      accessKeyId: { type: 'text' },
+      secretAccessKey: { type: 'password' },
+    },
+    label: function() {
+      return this.name;
+    },
+  });
+</script>
+
+<style>
+  .inputWidth {
+    width: 60% !important;
+  }
+  .labelWidth {
+    width: 140px !important;
+  }
+</style>
+
+<script type="text/x-red" data-template-name="aws">
+  <div class="form-row">
+    <label for="node-config-input-name" class="labelWidth"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-config-input-name" class="inputWidth" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-accessKeyId" class="labelWidth"><i class="fa fa-user"></i> Access key ID</label>
+    <input type="text" id="node-config-input-accessKeyId" class="inputWidth" placeholder="Access key ID">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-secretAccessKey" class="labelWidth"><i class="fa fa-key"></i> Secret access key</label>
+    <input type="password" id="node-config-input-secretAccessKey" class="inputWidth" placeholder="Secret access key">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-region" class="labelWidth"><i class="fa fa-globe"></i> Region</label>
+    <select id="node-config-input-region">
+        <option value="us-east-1">US East (N. Virginia) [us-east-1]</option>
+        <option value="us-west-2">US West (Oregon) [us-west-2]</option>
+        <option value="eu-west-1">EU (Ireland) [eu-west-1]</option>
+        <option value="us-east-2">US East (Ohio)  [us-east-2]</option>
+        <option value="us-west-1">US West (N. California) [us-west-1]</option>
+        <option value="ap-south-1 ">Asia Pacific (Mumbai) [ap-south-1 ]</option>
+        <option value="ap-northeast-2">Asia Pacific (Seoul)  [ap-northeast-2]</option>
+        <option value="ap-southeast-1">Asia Pacific (Singapore)  [ap-southeast-1]</option>
+        <option value="ap-southeast-2">Asia Pacific (Sydney) [ap-southeast-2]</option>
+        <option value="ap-northeast-1">Asia Pacific (Tokyo)  [ap-northeast-1]</option>
+        <option value="ca-central-1">Canada (Central)  [ca-central-1]</option>
+        <option value="cn-northwest-1">China (Ningxia) [cn-northwest-1]</option>
+        <option value="eu-central-1">EU (Frankfurt)  [eu-central-1]</option>
+        <option value="eu-west-2">EU (London) [eu-west-2]</option>
+        <option value="eu-west-3">EU (Paris)  [eu-west-3]</option>
+        <option value="eu-north-1">EU (Stockholm)  [eu-north-1]</option>
+        <option value="sa-east-1">South America (Sao Paulo) [sa-east-1]</option>
+        <option value="us-gov-west-1">AWS GovCloud (US-West)  [us-gov-west-1]</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-bucket" class="labelWidth"><i class="fa fa-folder-open"></i> Bucket name</label>
+    <input type="text" id="node-config-input-bucket" class="inputWidth" placeholder="Bucket name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="aws">
+  <p>Manage AWS account configuration.</p>
+
+  <h3>Details</h3>
+  <p><code>Access key ID</code> and <code>Secret access key</code> are required to interact with Amazon Polly and S3
+     APIs. For security reasons they are omitted when flows are exported from the editor.</p>
+  <p><code>Name</code> property is shown on selection lists to easily switch between different AWS configurations.</p>
+</script>

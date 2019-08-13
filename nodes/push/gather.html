@@ -6,7 +6,9 @@
       name: { value: '' },
       maxDigits: { value: '1' },
       timeout: { value: '2000' },
+      audio: { value: 'none' },
       playUrl: { value: '' },
+      tts: { value: '', type: 'tts', required: false },
       onAnswer: { value: '' },
       onHangup: { value: '' },
       outputs: { value: 1 },
@@ -29,6 +31,12 @@
         var callbackOutput = $(selector);
         var sourcePort = callbackOutput.prop('checked') ? id++ : i + 10;
         callbackOutput.data('sourcePort', sourcePort);
+      });
+
+      $('#node-input-audio').change(function(e) {
+        var val = $(this).val();
+        $('.node-row-playUrl').toggle(val === 'sound');
+        $('.node-row-tts').toggle(val === 'tts');
       });
     },
     oneditsave: function() {
@@ -58,8 +66,24 @@
     <input type="text" id="node-input-timeout" placeholder="Timeout (ms) (default: 2000)">
   </div>
   <div class="form-row">
-    <label for="node-input-playUrl"><i class="fa fa-globe"></i> Sound URL</label>
-    <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+    <label for="node-input-audio"><i class="fa fa-play-circle"></i> Audio</label>
+    <select id="node-input-audio">
+        <option value="none">No audio</option>
+        <option value="sound">Sound URL</option>
+        <option value="tts">Text-to-Speech</option>
+    </select>
+  </div>
+  <div class="node-row-playUrl">
+    <div class="form-row">
+      <label for="node-input-playUrl"><i class="fa fa-volume-up"></i> Sound URL</label>
+      <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+    </div>
+  </div>
+  <div class="node-row-tts">
+    <div class="form-row">
+      <label for="node-input-tts"><i class="fa fa-microphone"></i> TTS</label>
+      <input type="text" id="node-input-tts">
+    </div>
   </div>
   <div class="form-row">
     <label for="node-input-onAnswer"><i class="fa fa-phone"></i> onAnswer</label>
