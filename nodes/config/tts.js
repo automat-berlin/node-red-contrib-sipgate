@@ -13,8 +13,8 @@ module.exports = function(RED) {
     var node = this;
 
     var awsConfig = {
-      accessKeyId: node.aws.accessKeyId,
-      secretAccessKey: node.aws.secretAccessKey,
+      accessKeyId: node.aws.credentials.accessKeyId,
+      secretAccessKey: node.aws.credentials.secretAccessKey,
       region: node.aws.region,
     };
     var pollyConfig = Object.assign({ apiVersion: '2016-06-10' }, awsConfig);
