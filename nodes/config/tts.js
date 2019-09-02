@@ -40,7 +40,7 @@ module.exports = function(RED) {
       return polly.synthesizeSpeech(ttsParams).promise();
     }
 
-    function getBucket() {
+    function headBucket() {
       var params = {
         Bucket: node.aws.bucket,
       };
@@ -54,24 +54,42 @@ module.exports = function(RED) {
       return S3.createBucket(params).promise();
     }
 
-    getBucket()
+    function headObject() {
+      var params = {
+        Bucket: node.aws.bucket,
+        Key: node.s3filename,
+      };
+      return S3.headObject(params).promise();
+    }
+
+    function setS3url() {
+      node.s3url = `https://${node.aws.bucket}.s3.${node.aws.region}.amazonaws.com/${node.s3filename}`;
+    }
+
+    headObject()
+      .then(function() {
+        setS3url();
+      })
       .catch(function() {
-        return createBucket();
-      })
-      .then(function() {
-        return textToSpeech();
-      })
-      .then(function(data) {
-        var pollyData = data.AudioStream;
-        var body = convertPCMToWAV(pollyData);
-        var objectParams = { Bucket: node.aws.bucket, Key: node.s3filename, Body: body, ACL: 'public-read' };
-        return S3.putObject(objectParams).promise();
-      })
-      .then(function() {
-        node.s3url = `https://${node.aws.bucket}.s3.${node.aws.region}.amazonaws.com/${node.s3filename}`;
-      })
-      .catch(function(err) {
-        console.log(err, err.stack);
+        headBucket()
+          .catch(function() {
+            return createBucket();
+          })
+          .then(function() {
+            return textToSpeech();
+          })
+          .then(function(data) {
+            var pollyData = data.AudioStream;
+            var body = convertPCMToWAV(pollyData);
+            var objectParams = { Bucket: node.aws.bucket, Key: node.s3filename, Body: body, ACL: 'public-read' };
+            return S3.putObject(objectParams).promise();
+          })
+          .then(function() {
+            setS3url();
+          })
+          .catch(function(err) {
+            console.log(err, err.stack);
+          });
       });
   }
   RED.nodes.registerType('tts', TTSNode);
