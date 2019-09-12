@@ -12,11 +12,11 @@ You can get hands-on experience with Node-RED and sipgate nodes by deploying the
 
 ## Installation
 
-Prerequisite: You need to have running Node-RED instance. If you don't have yet, read [Node-RED Getting Stared guide](https://nodered.org/docs/getting-started/).
+Prerequisite: You need to have a running Node-RED instance. If you don't have yet, read [Node-RED Getting Started guide](https://nodered.org/docs/getting-started/).
 
 ### Install last released version from Node-RED dashboard
 
-The easiest way to install sipgate.io nodes is to use `Manage palette` option in Node-RED menu (in top right corner of its dashboard). Switch to `Install` tab and search for `@automat-berlin/node-red-contrib-sipgate`. There should be only one result. Click `install` button near by it.
+The easiest way to install sipgate.io nodes is to use `Manage palette` option in Node-RED menu (in the top right corner of its dashboard). Switch to `Install` tab and search for `@automat-berlin/node-red-contrib-sipgate`. There should be only one result. Click the `install` button nearby it.
 
 ### Install from the source code
 
@@ -31,9 +31,9 @@ npm install <path-to-cloned-repository>
 
 ## Configuration
 
-You should be aware how to configure Node-RED ([read the docs here](https://nodered.org/docs/user-guide/runtime/settings-file)).
+You should be aware of how to configure Node-RED ([read the docs here](https://nodered.org/docs/user-guide/runtime/settings-file)).
 
-Following instructions assume that you are using `settings.js` file for configuration (found in the user directory or specified with `-s` command line argument).
+Following instructions assume that you are using `settings.js` file for configuration (found in the user directory or specified with `-s` command-line argument).
 
 ### Set baseUrl for callbacks
 
