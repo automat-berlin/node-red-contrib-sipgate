@@ -88,7 +88,7 @@ module.exports = function(RED) {
             setS3url();
           })
           .catch(function(err) {
-            console.log(err, err.stack);
+            node.error(err, err.stack);
           });
       });
   }

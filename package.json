@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "aws-sdk": "^2.507.0",
+    "sinon": "^7.4.2",
     "xmlbuilder": "^13.0.1"
   },
   "devDependencies": {
