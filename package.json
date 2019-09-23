@@ -49,6 +49,7 @@
     "eslint": "^6.0.1",
     "husky": "^3.0.2",
     "lint-staged": "^9.2.1",
+    "mocha": "^6.2.0",
     "nock": "^10.0.6",
     "node-red": "^0.20.5",
     "node-red-node-test-helper": "^0.2.2",
@@ -59,7 +60,7 @@
     "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
     "start": "node node_modules/node-red/red.js --settings settings.js",
-    "test": "mocha \"test/**/*_spec.js\""
+    "test": "node_modules/.bin/mocha \"test/**/*_spec.js\""
   },
   "husky": {
     "hooks": {
