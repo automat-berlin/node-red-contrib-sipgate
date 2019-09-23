@@ -42,7 +42,6 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "request": "^2.88.0",
-    "url": "^0.11.0",
     "xmlbuilder": "^13.0.1"
   },
   "devDependencies": {
