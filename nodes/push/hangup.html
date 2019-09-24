@@ -4,8 +4,8 @@
     color: '#a6bbcf',
     defaults: {
       name: { value: '' },
-      audio: { value: 'none' },
-      playUrl: { value: '' },
+      sound: { value: 'none' },
+      soundUrl: { value: '' },
       tts: { value: '', type: 'tts', required: false },
     },
     inputs: 1,
@@ -15,9 +15,9 @@
       return this.name || 'hangup';
     },
     oneditprepare: function() {
-      $('#node-input-audio').change(function(e) {
+      $('#node-input-sound').change(function(e) {
         var val = $(this).val();
-        $('.node-row-playUrl').toggle(val === 'sound');
+        $('.node-row-soundUrl').toggle(val === 'url');
         $('.node-row-tts').toggle(val === 'tts');
       });
     },
@@ -26,17 +26,17 @@
 
 <script type="text/x-red" data-template-name="hangup">
   <div class="form-row">
-    <label for="node-input-audio"><i class="fa fa-play-circle"></i> Audio</label>
-    <select id="node-input-audio">
-        <option value="none">No audio</option>
-        <option value="sound">Sound URL</option>
+    <label for="node-input-sound"><i class="fa fa-play-circle"></i> Sound</label>
+    <select id="node-input-sound">
+        <option value="none">No sound</option>
+        <option value="url">Sound URL</option>
         <option value="tts">Text-to-Speech</option>
     </select>
   </div>
-  <div class="node-row-playUrl">
+  <div class="node-row-soundUrl">
     <div class="form-row">
-      <label for="node-input-playUrl"><i class="fa fa-volume-up"></i> Sound URL</label>
-      <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+      <label for="node-input-soundUrl"><i class="fa fa-volume-up"></i> Sound URL</label>
+      <input type="text" id="node-input-soundUrl" placeholder="Sound file URL">
     </div>
   </div>
   <div class="node-row-tts">
@@ -55,7 +55,7 @@
   <p>Hang up calls.</p>
 
   <h3>Details</h3>
-  <p><code>Audio</code> is set by default to <code>No audio</code>. Possible options are:</p>
+  <p><code>Sound</code> is set by default to <code>No sound</code>. Possible options are:</p>
   <ul>
     <li><code>Sound URL</code> which expects a direct URL to existing sound file (WAVE PCM format, 16 bit, mono 8000 Hz),</li>
     <li><code>Text-to-Speech</code> which allows to create a sound file based on provided text using Amazon AWS S3 and Polly services.</li>

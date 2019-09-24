@@ -123,11 +123,11 @@ describe('dial node', function() {
         type: 'dial',
         target: 'number',
         numbers: [{ number: '4915799912345' }],
-        audio: 'sound',
-        playUrl: 'http://example.com/example.wav',
+        sound: 'url',
+        soundUrl: 'http://example.com/example.wav',
       },
     ];
-    var xml = fs.readFileSync('test/resources/xml/dial_playUrl.xml', 'utf8');
+    var xml = fs.readFileSync('test/resources/xml/dial_soundUrl.xml', 'utf8');
     helper.load(dialNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.context().global.set('baseUrl', 'http://example.com');

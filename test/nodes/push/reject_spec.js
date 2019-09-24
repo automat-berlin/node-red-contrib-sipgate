@@ -38,9 +38,9 @@ describe('reject node', function() {
 
   it('should respond with proper XML when sound URL is provided', function(done) {
     var flow = [
-      { id: 'n1', type: 'reject', reason: 'rejected', audio: 'sound', playUrl: 'http://example.com/example.wav' },
+      { id: 'n1', type: 'reject', reason: 'rejected', sound: 'url', soundUrl: 'http://example.com/example.wav' },
     ];
-    var xml = fs.readFileSync('test/resources/xml/reject_playUrl.xml', 'utf8');
+    var xml = fs.readFileSync('test/resources/xml/reject_soundUrl.xml', 'utf8');
     helper.load(rejectNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.context().global.set('baseUrl', 'http://example.com');

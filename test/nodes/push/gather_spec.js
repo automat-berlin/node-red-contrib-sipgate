@@ -75,9 +75,9 @@ describe('gather node', function() {
     });
   });
 
-  it('should respond with proper XML for playUrl', function(done) {
-    var flow = [{ id: 'n1', type: 'gather', audio: 'sound', playUrl: 'http://example.com/example.wav' }];
-    var xml = fs.readFileSync('test/resources/xml/gather_playUrl.xml', 'utf8');
+  it('should respond with proper XML for soundUrl', function(done) {
+    var flow = [{ id: 'n1', type: 'gather', sound: 'url', soundUrl: 'http://example.com/example.wav' }];
+    var xml = fs.readFileSync('test/resources/xml/gather_soundUrl.xml', 'utf8');
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.context().global.set('baseUrl', 'http://example.com');
