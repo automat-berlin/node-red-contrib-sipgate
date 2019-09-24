@@ -10,7 +10,9 @@ module.exports = function(RED) {
     this.numbers = config.numbers;
     this.anonymous = config.anonymous;
     this.callerId = config.callerId;
+    this.audio = config.audio;
     this.playUrl = config.playUrl;
+    this.tts = RED.nodes.getNode(config.tts);
     this.onAnswer = config.onAnswer;
     this.onHangup = config.onHangup;
     this.outputs = config.outputs;
@@ -21,8 +23,10 @@ module.exports = function(RED) {
     node.on('input', function(msg) {
       var absoluteCallbackUrl = url.resolve(this.context().global.get('baseUrl'), node.callbackUrl);
       var root = xmlbuilder.create('Response').dec('1.0', 'UTF-8');
-      if (node.playUrl) {
+      if (node.audio && node.audio == 'sound' && node.playUrl) {
         root.ele('Play').ele('Url', {}, node.playUrl);
+      } else if (node.audio && node.audio == 'tts' && node.tts.s3url) {
+        root.ele('Play').ele('Url', {}, node.tts.s3url);
       }
       var dial_xml = root.ele('Dial');
       if (node.anonymous) {

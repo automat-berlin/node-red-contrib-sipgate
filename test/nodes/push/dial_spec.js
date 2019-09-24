@@ -123,6 +123,7 @@ describe('dial node', function() {
         type: 'dial',
         target: 'number',
         numbers: [{ number: '4915799912345' }],
+        audio: 'sound',
         playUrl: 'http://example.com/example.wav',
       },
     ];

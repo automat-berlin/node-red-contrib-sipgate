@@ -4,7 +4,9 @@
     color: '#a6bbcf',
     defaults: {
       name: { value: '' },
+      audio: { value: 'none' },
       playUrl: { value: '' },
+      tts: { value: '', type: 'tts', required: false },
     },
     inputs: 1,
     outputs: 0,
@@ -12,13 +14,36 @@
     label: function() {
       return this.name || 'hangup';
     },
+    oneditprepare: function() {
+      $('#node-input-audio').change(function(e) {
+        var val = $(this).val();
+        $('.node-row-playUrl').toggle(val === 'sound');
+        $('.node-row-tts').toggle(val === 'tts');
+      });
+    },
   });
 </script>
 
 <script type="text/x-red" data-template-name="hangup">
   <div class="form-row">
-    <label for="node-input-playUrl"><i class="fa fa-globe"></i> Sound URL</label>
-    <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+    <label for="node-input-audio"><i class="fa fa-play-circle"></i> Audio</label>
+    <select id="node-input-audio">
+        <option value="none">No audio</option>
+        <option value="sound">Sound URL</option>
+        <option value="tts">Text-to-Speech</option>
+    </select>
+  </div>
+  <div class="node-row-playUrl">
+    <div class="form-row">
+      <label for="node-input-playUrl"><i class="fa fa-volume-up"></i> Sound URL</label>
+      <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+    </div>
+  </div>
+  <div class="node-row-tts">
+    <div class="form-row">
+      <label for="node-input-tts"><i class="fa fa-microphone"></i> TTS</label>
+      <input type="text" id="node-input-tts">
+    </div>
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
