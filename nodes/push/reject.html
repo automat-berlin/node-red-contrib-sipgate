@@ -61,4 +61,13 @@
 
 <script type="text/x-red" data-help-name="reject">
   <p>Reject call or pretend to be busy.</p>
+
+  <h3>Details</h3>
+  <p><code>Audio</code> is set by default to <code>No audio</code>. Possible options are:</p>
+  <ul>
+    <li><code>Sound URL</code> which expects a direct URL to existing sound file (WAVE PCM format, 16 bit, mono 8000 Hz),</li>
+    <li><code>Text-to-Speech</code> which allows to create a sound file based on provided text using Amazon AWS S3 and Polly services.</li>
+  </ul>
+  <p>The sound file will start playing at the beginning of the call. The call will be rejected after the sound has
+     finished playing.</p>
 </script>

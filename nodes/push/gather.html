@@ -107,9 +107,13 @@
   <p><code>maxDigits</code> defines maximum number of digits collected in time period limited by <code>Timeout</code>
      value.</p>
   <p><code>Timeout</code> value is in miliseconds.</p>
-  <p><code>Sound URL</code> is optional. If provided then the sound file will start playing at the beginning of the
-     call. It will stop immediately after the first digit is received. The timeout starts after the sound has finished
-     playing.</p>
+  <p><code>Audio</code> is set by default to <code>No audio</code>. Possible options are:</p>
+  <ul>
+    <li><code>Sound URL</code> which expects a direct URL to existing sound file (WAVE PCM format, 16 bit, mono 8000 Hz),</li>
+    <li><code>Text-to-Speech</code> which allows to create a sound file based on provided text using Amazon AWS S3 and Polly services.</li>
+  </ul>
+  <p>The sound file will start playing at the beginning of the call. It will stop immediately after the first digit is
+     received. The timeout starts after the sound has finished playing.</p>
   <p><code>onAnswer</code> and <code>onHangup</code> activates additional outputs for data received from sipgate.io when
      <code>answer</code> or <code>hangup</code> events occur.</p>
 </script>
