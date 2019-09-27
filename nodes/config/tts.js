@@ -17,10 +17,7 @@ module.exports = function(RED) {
       secretAccessKey: node.aws.credentials.secretAccessKey,
       region: node.aws.region,
     };
-    var pollyConfig = Object.assign({ apiVersion: '2016-06-10' }, awsConfig);
-    var s3Config = Object.assign({ apiVersion: '2006-03-01' }, awsConfig);
-    var polly = AWS.Polly(pollyConfig);
-    var S3 = AWS.S3(s3Config);
+    var client = AWS.client(awsConfig);
 
     var textHash = crypto
       .createHash('md5')
@@ -32,22 +29,24 @@ module.exports = function(RED) {
       node.s3url = `https://${node.aws.bucket}.s3.${node.aws.region}.amazonaws.com/${node.s3filename}`;
     }
 
-    AWS.headObject(node.aws.bucket, node.s3filename)
+    client
+      .headObject(node.aws.bucket, node.s3filename)
       .then(function() {
         setS3url();
       })
       .catch(function() {
-        AWS.headBucket(node.aws.bucket)
+        client
+          .headBucket(node.aws.bucket)
           .catch(function() {
-            return AWS.createBucket(node.aws.bucket);
+            return client.createBucket(node.aws.bucket);
           })
           .then(function() {
-            return AWS.synthesizeSpeech(node.text, node.language, node.voice, textHash);
+            return client.synthesizeSpeech(node.text, node.language, node.voice, textHash);
           })
           .then(function(data) {
             var pollyData = data.AudioStream;
             var body = convertPCMToWAV(pollyData);
-            return AWS.putObject(node.aws.bucket, node.s3filename, body);
+            return client.putObject(node.aws.bucket, node.s3filename, body);
           })
           .then(function() {
             setS3url();
@@ -56,12 +55,11 @@ module.exports = function(RED) {
             node.error(err, err.stack);
           });
       });
+
+    var cleanState = function() {
+      client.cleanState();
+    };
+    RED.events.once('nodes-stopped', cleanState);
   }
   RED.nodes.registerType('tts', TTSNode);
-
-  var cleanState = function() {
-    AWS.cleanState();
-    RED.events.removeListener('nodes-stopped', cleanState);
-  };
-  RED.events.on('nodes-stopped', cleanState);
 };
