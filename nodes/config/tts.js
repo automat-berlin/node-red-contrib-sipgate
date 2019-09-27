@@ -1,6 +1,6 @@
 module.exports = function(RED) {
   'use strict';
-  var AWS = require('aws-sdk');
+  var AWS = require('../../utils/awsService.js');
   var crypto = require('crypto');
   var convertPCMToWAV = require('../../utils/convertPCMToWAV.js');
 
@@ -19,8 +19,8 @@ module.exports = function(RED) {
     };
     var pollyConfig = Object.assign({ apiVersion: '2016-06-10' }, awsConfig);
     var s3Config = Object.assign({ apiVersion: '2006-03-01' }, awsConfig);
-    var polly = new AWS.Polly(pollyConfig);
-    var S3 = new AWS.S3(s3Config);
+    var polly = AWS.Polly(pollyConfig);
+    var S3 = AWS.S3(s3Config);
 
     var textHash = crypto
       .createHash('md5')
@@ -28,61 +28,26 @@ module.exports = function(RED) {
       .digest('hex');
     node.s3filename = `${node.language}-${node.voice}-${textHash}.wav`;
 
-    function textToSpeech() {
-      var ttsParams = {
-        OutputFormat: 'pcm',
-        SampleRate: '8000',
-        Text: node.text,
-        TextType: 'text',
-        LanguageCode: node.language,
-        VoiceId: node.voice,
-      };
-      return polly.synthesizeSpeech(ttsParams).promise();
-    }
-
-    function headBucket() {
-      var params = {
-        Bucket: node.aws.bucket,
-      };
-      return S3.headBucket(params).promise();
-    }
-
-    function createBucket() {
-      var params = {
-        Bucket: node.aws.bucket,
-      };
-      return S3.createBucket(params).promise();
-    }
-
-    function headObject() {
-      var params = {
-        Bucket: node.aws.bucket,
-        Key: node.s3filename,
-      };
-      return S3.headObject(params).promise();
-    }
-
     function setS3url() {
       node.s3url = `https://${node.aws.bucket}.s3.${node.aws.region}.amazonaws.com/${node.s3filename}`;
     }
 
-    headObject()
+    AWS.headObject(node.aws.bucket, node.s3filename)
       .then(function() {
         setS3url();
       })
       .catch(function() {
-        headBucket()
+        AWS.headBucket(node.aws.bucket)
           .catch(function() {
-            return createBucket();
+            return AWS.createBucket(node.aws.bucket);
           })
           .then(function() {
-            return textToSpeech();
+            return AWS.synthesizeSpeech(node.text, node.language, node.voice, textHash);
           })
           .then(function(data) {
             var pollyData = data.AudioStream;
             var body = convertPCMToWAV(pollyData);
-            var objectParams = { Bucket: node.aws.bucket, Key: node.s3filename, Body: body, ACL: 'public-read' };
-            return S3.putObject(objectParams).promise();
+            return AWS.putObject(node.aws.bucket, node.s3filename, body);
           })
           .then(function() {
             setS3url();
@@ -93,4 +58,10 @@ module.exports = function(RED) {
       });
   }
   RED.nodes.registerType('tts', TTSNode);
+
+  var cleanState = function() {
+    AWS.cleanState();
+    RED.events.removeListener('nodes-stopped', cleanState);
+  };
+  RED.events.on('nodes-stopped', cleanState);
 };
