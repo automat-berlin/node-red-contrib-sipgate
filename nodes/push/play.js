@@ -6,7 +6,9 @@ module.exports = function(RED) {
 
   function PlayNode(config) {
     RED.nodes.createNode(this, config);
-    this.url = config.url;
+    this.sound = config.sound;
+    this.soundUrl = config.soundUrl;
+    this.tts = RED.nodes.getNode(config.tts);
     this.onAnswer = config.onAnswer;
     this.onHangup = config.onHangup;
     this.outputs = config.outputs;
@@ -17,14 +19,18 @@ module.exports = function(RED) {
     node.on('input', function(msg) {
       var absoluteCallbackUrl = url.resolve(this.context().global.get('baseUrl'), node.callbackUrl);
       var root = xmlbuilder.create('Response').dec('1.0', 'UTF-8');
-      var xml = root.ele('Play').ele('Url', {}, node.url);
+      if (node.sound && node.sound == 'url' && node.soundUrl) {
+        root.ele('Play').ele('Url', {}, node.soundUrl);
+      } else if (node.sound && node.sound == 'tts' && node.tts.s3url) {
+        root.ele('Play').ele('Url', {}, node.tts.s3url);
+      }
       if (node.onAnswer) {
         root.att('onAnswer', absoluteCallbackUrl);
       }
       if (node.onHangup) {
         root.att('onHangup', absoluteCallbackUrl);
       }
-      msg.payload = xml.end({ pretty: true, indent: '    ' });
+      msg.payload = root.end({ pretty: true, indent: '    ' });
       msg.res._res.set('Content-Type', 'application/xml');
       msg.res._res.status(200).send(msg.payload);
     });

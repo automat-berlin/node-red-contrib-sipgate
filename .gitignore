@@ -17,3 +17,10 @@ selenium-debug.log
 # Editor directories and files
 .idea
 .vscode
+
+# Node-RED config files
+.config.json
+.config.json.backup
+.flows_none.json.backup
+flows_none.json
+flows_none_cred.json

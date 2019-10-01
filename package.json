@@ -33,6 +33,8 @@
       "webhook": "nodes/push/webhook.js",
       "log": "nodes/push/log.js",
       "account": "nodes/config/account.js",
+      "tts": "nodes/config/tts.js",
+      "aws": "nodes/config/aws.js",
       "hangup-call": "nodes/rtcm/hangup-call.js"
     }
   },
@@ -40,6 +42,7 @@
     "nodes"
   ],
   "dependencies": {
+    "aws-sdk": "^2.507.0",
     "body-parser": "^1.19.0",
     "request": "^2.88.0",
     "xmlbuilder": "^13.0.1"
@@ -53,6 +56,7 @@
     "node-red": "^0.20.5",
     "node-red-node-test-helper": "^0.2.2",
     "prettier": "1.18.2",
+    "sinon": "^7.5.0",
     "should": "^13.2.3"
   },
   "scripts": {

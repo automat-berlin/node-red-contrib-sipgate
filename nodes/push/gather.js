@@ -8,7 +8,9 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config);
     this.maxDigits = config.maxDigits || 1;
     this.timeout = config.timeout || 2000;
-    this.playUrl = config.playUrl;
+    this.sound = config.sound;
+    this.soundUrl = config.soundUrl;
+    this.tts = RED.nodes.getNode(config.tts);
     this.onAnswer = config.onAnswer;
     this.onHangup = config.onHangup;
     this.outputs = config.outputs;
@@ -20,8 +22,10 @@ module.exports = function(RED) {
       var absoluteCallbackUrl = url.resolve(this.context().global.get('baseUrl'), node.callbackUrl);
       var root = xmlbuilder.create('Response').dec('1.0', 'UTF-8');
       var xml = root.ele('Gather', { onData: absoluteCallbackUrl, maxDigits: node.maxDigits, timeout: node.timeout });
-      if (node.playUrl) {
-        xml.ele('Play').ele('Url', {}, node.playUrl);
+      if (node.sound && node.sound == 'url' && node.soundUrl) {
+        xml.ele('Play').ele('Url', {}, node.soundUrl);
+      } else if (node.sound && node.sound == 'tts' && node.tts.s3url) {
+        xml.ele('Play').ele('Url', {}, node.tts.s3url);
       }
       if (node.onAnswer) {
         root.att('onAnswer', absoluteCallbackUrl);

@@ -4,7 +4,9 @@
     color: '#a6bbcf',
     defaults: {
       name: { value: '' },
-      playUrl: { value: '' },
+      sound: { value: 'none' },
+      soundUrl: { value: '' },
+      tts: { value: '', type: 'tts', required: false },
     },
     inputs: 1,
     outputs: 0,
@@ -12,13 +14,36 @@
     label: function() {
       return this.name || 'hangup';
     },
+    oneditprepare: function() {
+      $('#node-input-sound').change(function(e) {
+        var val = $(this).val();
+        $('.node-row-soundUrl').toggle(val === 'url');
+        $('.node-row-tts').toggle(val === 'tts');
+      });
+    },
   });
 </script>
 
 <script type="text/x-red" data-template-name="hangup">
   <div class="form-row">
-    <label for="node-input-playUrl"><i class="fa fa-globe"></i> Sound URL</label>
-    <input type="text" id="node-input-playUrl" placeholder="Sound file URL">
+    <label for="node-input-sound"><i class="fa fa-play-circle"></i> Sound</label>
+    <select id="node-input-sound">
+        <option value="none">No sound</option>
+        <option value="url">Sound URL</option>
+        <option value="tts">Text-to-Speech</option>
+    </select>
+  </div>
+  <div class="node-row-soundUrl">
+    <div class="form-row">
+      <label for="node-input-soundUrl"><i class="fa fa-volume-up"></i> Sound URL</label>
+      <input type="text" id="node-input-soundUrl" placeholder="Sound file URL">
+    </div>
+  </div>
+  <div class="node-row-tts">
+    <div class="form-row">
+      <label for="node-input-tts"><i class="fa fa-microphone"></i> TTS</label>
+      <input type="text" id="node-input-tts">
+    </div>
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -28,4 +53,13 @@
 
 <script type="text/x-red" data-help-name="hangup">
   <p>Hang up calls.</p>
+
+  <h3>Details</h3>
+  <p><code>Sound</code> is set by default to <code>No sound</code>. Possible options are:</p>
+  <ul>
+    <li><code>Sound URL</code> which expects a direct URL to existing sound file (WAVE PCM format, 16 bit, mono 8000 Hz),</li>
+    <li><code>Text-to-Speech</code> which allows to create a sound file based on provided text using Amazon AWS S3 and Polly services.</li>
+  </ul>
+  <p>The sound file will start playing at the beginning of the call. The call will be hung up after the sound has
+     finished playing.</p>
 </script>
