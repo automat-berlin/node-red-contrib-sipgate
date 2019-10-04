@@ -1,6 +1,55 @@
 <script type="text/javascript">
-  var languages = [
-    {
+  var languages = {
+    arb: {
+      code: 'arb',
+      name: 'Arabic',
+      voices: [
+        {
+          id: 'Zeina',
+          name: 'Zeina',
+          gender: 'Female',
+        },
+      ],
+    },
+    'cmn-CN': {
+      code: 'cmn-CN',
+      name: 'Chinese Mandarin',
+      voices: [
+        {
+          id: 'Zhiyu',
+          name: 'Zhiyu',
+          gender: 'Female',
+        },
+      ],
+    },
+    'cy-GB': {
+      code: 'cy-GB',
+      name: 'Welsh',
+      voices: [
+        {
+          id: 'Gwyneth',
+          name: 'Gwyneth',
+          gender: 'Female',
+        },
+      ],
+    },
+    'da-DK': {
+      code: 'da-DK',
+      name: 'Danish',
+      voices: [
+        {
+          id: 'Naja',
+          name: 'Naja',
+          gender: 'Female',
+        },
+        {
+          id: 'Mads',
+          name: 'Mads',
+          gender: 'Male',
+        },
+      ],
+    },
+    'de-DE': {
       code: 'de-DE',
       name: 'German',
       voices: [
@@ -10,19 +59,88 @@
           gender: 'Female',
         },
         {
+          id: 'Marlene',
+          name: 'Marlene',
+          gender: 'Female',
+        },
+        {
           id: 'Hans',
           name: 'Hans',
           gender: 'Male',
         },
       ],
     },
-    {
+    'en-AU': {
+      code: 'en-AU',
+      name: 'Australian English',
+      voices: [
+        {
+          id: 'Russell',
+          name: 'Russell',
+          gender: 'Male',
+        },
+        {
+          id: 'Nicole',
+          name: 'Nicole',
+          gender: 'Female',
+        },
+      ],
+    },
+    'en-GB': {
+      code: 'en-GB',
+      name: 'British English',
+      voices: [
+        {
+          id: 'Emma',
+          name: 'Emma',
+          gender: 'Female',
+        },
+        {
+          id: 'Brian',
+          name: 'Brian',
+          gender: 'Male',
+        },
+        {
+          id: 'Amy',
+          name: 'Amy',
+          gender: 'Female',
+        },
+      ],
+    },
+    'en-GB-WLS': {
+      code: 'en-GB-WLS',
+      name: 'Welsh English',
+      voices: [
+        {
+          id: 'Geraint',
+          name: 'Geraint',
+          gender: 'Male',
+        },
+      ],
+    },
+    'en-IN': {
+      code: 'en-IN',
+      name: 'Indian English',
+      voices: [
+        {
+          id: 'Raveena',
+          name: 'Raveena',
+          gender: 'Female',
+        },
+        {
+          id: 'Aditi',
+          name: 'Aditi',
+          gender: 'Female',
+        },
+      ],
+    },
+    'en-US': {
       code: 'en-US',
       name: 'US English',
       voices: [
         {
-          id: 'Joanna',
-          name: 'Joanna',
+          id: 'Salli',
+          name: 'Salli',
           gender: 'Female',
         },
         {
@@ -30,9 +148,317 @@
           name: 'Matthew',
           gender: 'Male',
         },
+        {
+          id: 'Kimberly',
+          name: 'Kimberly',
+          gender: 'Female',
+        },
+        {
+          id: 'Kendra',
+          name: 'Kendra',
+          gender: 'Female',
+        },
+        {
+          id: 'Justin',
+          name: 'Justin',
+          gender: 'Male',
+        },
+        {
+          id: 'Joey',
+          name: 'Joey',
+          gender: 'Male',
+        },
+        {
+          id: 'Joanna',
+          name: 'Joanna',
+          gender: 'Female',
+        },
+        {
+          id: 'Ivy',
+          name: 'Ivy',
+          gender: 'Female',
+        },
       ],
     },
-  ];
+    'es-ES': {
+      code: 'es-ES',
+      name: 'Castilian Spanish',
+      voices: [
+        {
+          id: 'Lucia',
+          name: 'Lucia',
+          gender: 'Female',
+        },
+        {
+          id: 'Enrique',
+          name: 'Enrique',
+          gender: 'Male',
+        },
+        {
+          id: 'Conchita',
+          name: 'Conchita',
+          gender: 'Female',
+        },
+      ],
+    },
+    'es-MX': {
+      code: 'es-MX',
+      name: 'Mexican Spanish',
+      voices: [
+        {
+          id: 'Mia',
+          name: 'Mia',
+          gender: 'Female',
+        },
+      ],
+    },
+    'es-US': {
+      code: 'es-US',
+      name: 'US Spanish',
+      voices: [
+        {
+          id: 'Penelope',
+          name: 'Penélope',
+          gender: 'Female',
+        },
+        {
+          id: 'Miguel',
+          name: 'Miguel',
+          gender: 'Male',
+        },
+      ],
+    },
+    'fr-CA': {
+      code: 'fr-CA',
+      name: 'Canadian French',
+      voices: [
+        {
+          id: 'Chantal',
+          name: 'Chantal',
+          gender: 'Female',
+        },
+      ],
+    },
+    'fr-FR': {
+      code: 'fr-FR',
+      name: 'French',
+      voices: [
+        {
+          id: 'Mathieu',
+          name: 'Mathieu',
+          gender: 'Male',
+        },
+        {
+          id: 'Lea',
+          name: 'Léa',
+          gender: 'Female',
+        },
+        {
+          id: 'Celine',
+          name: 'Céline',
+          gender: 'Female',
+        },
+      ],
+    },
+    'is-IS': {
+      code: 'is-IS',
+      name: 'Icelandic',
+      voices: [
+        {
+          id: 'Karl',
+          name: 'Karl',
+          gender: 'Male',
+        },
+        {
+          id: 'Dora',
+          name: 'Dóra',
+          gender: 'Female',
+        },
+      ],
+    },
+    'it-IT': {
+      code: 'it-IT',
+      name: 'Italian',
+      voices: [
+        {
+          id: 'Bianca',
+          name: 'Bianca',
+          gender: 'Female',
+        },
+        {
+          id: 'Giorgio',
+          name: 'Giorgio',
+          gender: 'Male',
+        },
+        {
+          id: 'Carla',
+          name: 'Carla',
+          gender: 'Female',
+        },
+      ],
+    },
+    'ja-JP': {
+      code: 'ja-JP',
+      name: 'Japanese',
+      voices: [
+        {
+          id: 'Takumi',
+          name: 'Takumi',
+          gender: 'Male',
+        },
+        {
+          id: 'Mizuki',
+          name: 'Mizuki',
+          gender: 'Female',
+        },
+      ],
+    },
+    'ko-KR': {
+      code: 'ko-KR',
+      name: 'Korean',
+      voices: [
+        {
+          id: 'Seoyeon',
+          name: 'Seoyeon',
+          gender: 'Female',
+        },
+      ],
+    },
+    'nb-NO': {
+      code: 'nb-NO',
+      name: 'Norwegian',
+      voices: [
+        {
+          id: 'Liv',
+          name: 'Liv',
+          gender: 'Female',
+        },
+      ],
+    },
+    'nl-NL': {
+      code: 'nl-NL',
+      name: 'Dutch',
+      voices: [
+        {
+          id: 'Ruben',
+          name: 'Ruben',
+          gender: 'Male',
+        },
+        {
+          id: 'Lotte',
+          name: 'Lotte',
+          gender: 'Female',
+        },
+      ],
+    },
+    'pl-PL': {
+      code: 'pl-PL',
+      name: 'Polish',
+      voices: [
+        {
+          id: 'Maja',
+          name: 'Maja',
+          gender: 'Female',
+        },
+        {
+          id: 'Jan',
+          name: 'Jan',
+          gender: 'Male',
+        },
+        {
+          id: 'Jacek',
+          name: 'Jacek',
+          gender: 'Male',
+        },
+        {
+          id: 'Ewa',
+          name: 'Ewa',
+          gender: 'Female',
+        },
+      ],
+    },
+    'pt-BR': {
+      code: 'pt-BR',
+      name: 'Brazilian Portuguese',
+      voices: [
+        {
+          id: 'Vitoria',
+          name: 'Vitória',
+          gender: 'Female',
+        },
+        {
+          id: 'Ricardo',
+          name: 'Ricardo',
+          gender: 'Male',
+        },
+      ],
+    },
+    'pt-PT': {
+      code: 'pt-PT',
+      name: 'Portuguese',
+      voices: [
+        {
+          id: 'Ines',
+          name: 'Inês',
+          gender: 'Female',
+        },
+        {
+          id: 'Cristiano',
+          name: 'Cristiano',
+          gender: 'Male',
+        },
+      ],
+    },
+    'ro-RO': {
+      code: 'ro-RO',
+      name: 'Romanian',
+      voices: [
+        {
+          id: 'Carmen',
+          name: 'Carmen',
+          gender: 'Female',
+        },
+      ],
+    },
+    'ru-RU': {
+      code: 'ru-RU',
+      name: 'Russian',
+      voices: [
+        {
+          id: 'Tatyana',
+          name: 'Tatyana',
+          gender: 'Female',
+        },
+        {
+          id: 'Maxim',
+          name: 'Maxim',
+          gender: 'Male',
+        },
+      ],
+    },
+    'sv-SE': {
+      code: 'sv-SE',
+      name: 'Swedish',
+      voices: [
+        {
+          id: 'Astrid',
+          name: 'Astrid',
+          gender: 'Female',
+        },
+      ],
+    },
+    'tr-TR': {
+      code: 'tr-TR',
+      name: 'Turkish',
+      voices: [
+        {
+          id: 'Filiz',
+          name: 'Filiz',
+          gender: 'Female',
+        },
+      ],
+    },
+  };
 
   RED.nodes.registerType('tts', {
     category: 'config',
@@ -40,30 +466,28 @@
       name: { value: '', required: true },
       aws: { value: '', type: 'aws' },
       text: { value: '', required: true },
-      language: { value: '', required: true },
-      voice: { value: '', required: true },
+      language: { value: 'en-US', required: true },
+      voice: { value: languages['en-US'].voices[0].id, required: true },
     },
     label: function() {
       return this.name;
     },
     oneditprepare: function() {
       var node = this;
-      languages.forEach(function(language) {
+      for (var languageCode in languages) {
         $('#node-config-input-language').append(
           $('<option>', {
-            value: language.code,
-            text: '[' + language.code + '] ' + language.name,
+            value: languageCode,
+            text: '[' + languageCode + '] ' + languages[languageCode].name,
           })
         );
-      });
+      }
       $('#node-config-input-language').val(node.language);
 
       $('#node-config-input-language').change(function(e) {
         var val = $(this).val();
         $('#node-config-input-voice option').remove();
-        var language = languages.find(function(language) {
-          return language.code === val;
-        });
+        var language = languages[val];
         if (language) {
           language.voices.forEach(function(voice) {
             $('#node-config-input-voice').append(
