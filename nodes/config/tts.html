@@ -1,81 +1,4 @@
 <script type="text/javascript">
-  RED.nodes.registerType('tts', {
-    category: 'config',
-    defaults: {
-      name: { value: '', required: true },
-      aws: { value: '', type: 'aws' },
-      text: { value: '', required: true },
-      language: { value: '', required: true },
-      voice: { value: '', required: true },
-    },
-    label: function() {
-      return this.name;
-    },
-    oneditprepare: function() {
-      var node = this;
-      for (var languageCode in languages) {
-        $('#node-config-input-language').append(
-          $('<option>', {
-            value: languageCode,
-            text: '[' + languageCode + '] ' + languages[languageCode].name,
-          })
-        );
-      }
-      $('#node-config-input-language').val(node.language || 'en-US');
-
-      $('#node-config-input-language').change(function(e) {
-        var val = $(this).val();
-        $('#node-config-input-voice option').remove();
-        var language = languages[val];
-        if (language) {
-          language.voices.forEach(function(voice) {
-            $('#node-config-input-voice').append(
-              $('<option>', {
-                value: voice.id,
-                text: voice.name + ' (' + voice.gender + ')',
-              })
-            );
-          });
-        }
-        $('#node-config-input-voice').val(node.voice || 'Joanna');
-      });
-    },
-  });
-</script>
-
-<script type="text/x-red" data-template-name="tts">
-  <div class="form-row">
-    <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
-    <input type="text" id="node-config-input-name" placeholder="Name">
-  </div>
-  <div class="form-row">
-    <label for="node-config-input-aws"><i class="fa fa-user"></i> AWS</label>
-    <input type="text" id="node-config-input-aws">
-  </div>
-  <div class="form-row">
-    <label for="node-config-input-text"><i class="fa fa-align-left"></i> Text</label>
-    <textarea rows="10" style="width: 70%;" id="node-config-input-text"/>
-  </div>
-  <div class="form-row">
-    <label for="node-config-input-language"><i class="fa fa-language"></i> Language</label>
-    <select id="node-config-input-language"></select>
-  </div>
-  <div class="form-row">
-    <label for="node-config-input-voice"><i class="fa fa-microphone"></i> Voice</label>
-    <select id="node-config-input-voice"></select>
-  </div>
-</script>
-
-<script type="text/x-red" data-help-name="tts">
-  <p>Manage text-to-speech configuration.</p>
-
-  <h3>Details</h3>
-  <p><code>AWS</code> account configuration is required to use Amazon Polly and S3 APIs.</p>
-  <p><code>Name</code> property is shown on selection lists to easily switch between different text-to-speech
-     configurations.</p>
-</script>
-
-<script type="text/javascript">
   var languages = {
     arb: {
       code: 'arb',
@@ -536,4 +459,79 @@
       ],
     },
   };
+
+  RED.nodes.registerType('tts', {
+    category: 'config',
+    defaults: {
+      name: { value: '', required: true },
+      aws: { value: '', type: 'aws' },
+      text: { value: '', required: true },
+      language: { value: 'en-US', required: true },
+      voice: { value: languages['en-US'].voices[0].id, required: true },
+    },
+    label: function() {
+      return this.name;
+    },
+    oneditprepare: function() {
+      var node = this;
+      for (var languageCode in languages) {
+        $('#node-config-input-language').append(
+          $('<option>', {
+            value: languageCode,
+            text: '[' + languageCode + '] ' + languages[languageCode].name,
+          })
+        );
+      }
+      $('#node-config-input-language').val(node.language);
+
+      $('#node-config-input-language').change(function(e) {
+        var val = $(this).val();
+        $('#node-config-input-voice option').remove();
+        var language = languages[val];
+        if (language) {
+          language.voices.forEach(function(voice) {
+            $('#node-config-input-voice').append(
+              $('<option>', {
+                value: voice.id,
+                text: voice.name + ' (' + voice.gender + ')',
+              })
+            );
+          });
+        }
+        $('#node-config-input-voice').val(node.voice);
+      });
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="tts">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-aws"><i class="fa fa-user"></i> AWS</label>
+    <input type="text" id="node-config-input-aws">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-text"><i class="fa fa-align-left"></i> Text</label>
+    <textarea rows="10" style="width: 70%;" id="node-config-input-text"/>
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-language"><i class="fa fa-language"></i> Language</label>
+    <select id="node-config-input-language"></select>
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-voice"><i class="fa fa-microphone"></i> Voice</label>
+    <select id="node-config-input-voice"></select>
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="tts">
+  <p>Manage text-to-speech configuration.</p>
+
+  <h3>Details</h3>
+  <p><code>AWS</code> account configuration is required to use Amazon Polly and S3 APIs.</p>
+  <p><code>Name</code> property is shown on selection lists to easily switch between different text-to-speech
+     configurations.</p>
 </script>
