@@ -12,6 +12,9 @@ module.exports = {
   // the tcp port that the Node-RED web server is listening on
   uiPort: uiPort,
 
+  // The file containing the flows. If not set, it defaults to flows_<hostname>.json
+  flowFile: 'examples/Sample flow.json',
+
   // Node-RED scans the `nodes` directory in the userDir to find local node files
   userDir: __dirname,
 

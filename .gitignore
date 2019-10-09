@@ -24,3 +24,5 @@ selenium-debug.log
 .flows_none.json.backup
 flows_none.json
 flows_none_cred.json
+Sample flow_cred.json
+examples/.Sample flow.json.backup
