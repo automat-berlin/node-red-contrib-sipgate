@@ -29,6 +29,13 @@ module.exports = {
     'storage',
     'advanced',
   ],
+  
+  // enable projects to commit flows to git
+  editorTheme: {
+       projects: {
+           enabled: true
+       }
+   },
 
   // sets global context data
   functionGlobalContext: {
