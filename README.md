@@ -10,6 +10,8 @@ You can get hands-on experience with Node-RED and sipgate nodes by deploying the
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+Note: Deploy to Heroku button will not work properly if your browser is removing Referer HTTP header from the request.
+
 ## Installation
 
 Prerequisite: You need to have a running Node-RED instance. If you don't have yet, read [Node-RED Getting Started guide](https://nodered.org/docs/getting-started/).
