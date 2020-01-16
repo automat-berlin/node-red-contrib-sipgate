@@ -33,26 +33,7 @@ describe('log node', function() {
     });
   });
 
-  it('should create callback endpoint and remove it on close', function(done) {
-    var flow = [{ id: 'n1', type: 'log', onAnswer: true, onHangup: true }];
-    helper.load(logNode, flow, function() {
-      var n1 = helper.getNode('n1');
-      helper
-        .request()
-        .post(n1.callbackUrl)
-        .expect(200)
-        .end(done);
-      n1.on('close', function() {
-        helper
-          .request()
-          .post(n1.callbackUrl)
-          .expect(404)
-          .end(function(err, res) {
-            if (err) return done(err);
-          });
-      });
-    });
-  });
+  shared.shouldCreateAndRemoveCallbackEndpoint(logNode, 'log');
 
   var events = ['answer', 'hangup'];
 

@@ -30,11 +30,11 @@ module.exports = function(RED) {
     var maxApiRequestSize = RED.settings.apiMaxLength || '5mb';
     var urlencParser = bodyParser.urlencoded({ limit: maxApiRequestSize, extended: true });
 
-    RED.httpNode.post(this.url, urlencParser, this.callback, this.errorHandler);
+    RED.httpAdmin.post(this.url, urlencParser, this.callback, this.errorHandler);
 
     this.on('close', function() {
       var node = this;
-      RED.httpNode._router.stack.forEach(function(route, i, routes) {
+      RED.httpAdmin._router.stack.forEach(function(route, i, routes) {
         if (route.route && route.route.path === node.url && route.route.methods[node.method]) {
           routes.splice(i, 1);
         }

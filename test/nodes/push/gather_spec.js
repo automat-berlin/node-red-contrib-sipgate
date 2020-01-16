@@ -89,8 +89,8 @@ describe('gather node', function() {
     });
   });
 
-  it('should create callback endpoint');
-  it('should remove callback endpoint on close');
+  shared.shouldCreateAndRemoveCallbackEndpoint(gatherNode, 'gather');
+
   it('should respond with HTTP 200 to callback request except dtmf event');
   it('should send received callback payload to the next node');
 });
