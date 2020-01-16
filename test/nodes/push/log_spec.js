@@ -54,6 +54,38 @@ describe('log node', function() {
     });
   });
 
-  it('should respond with HTTP 200 to callback request');
-  it('should send received callback payload to the next node');
+  var events = ['answer', 'hangup'];
+
+  events.forEach(function(event) {
+    it('should send received ' + event + ' callback payload to the next node', function(done) {
+      var flow = [
+        { id: 'n1', type: 'log', onAnswer: true, onHangup: true, wires: [['n2'], ['n3']] },
+        { id: 'n2', type: 'helper' },
+        { id: 'n3', type: 'helper' },
+      ];
+      helper.load(logNode, flow, function() {
+        var n1 = helper.getNode('n1');
+        var n2 = helper.getNode('n2');
+        var n3 = helper.getNode('n3');
+        n2.on('input', function(msg) {
+          msg.should.have.property('payload');
+          msg.payload.should.have.property('event', event);
+          done();
+        });
+        n3.on('input', function(msg) {
+          msg.should.have.property('payload');
+          msg.payload.should.have.property('event', event);
+          done();
+        });
+        helper
+          .request()
+          .post(n1.callbackUrl)
+          .expect(200)
+          .send('event=' + event)
+          .end(function(err, res) {
+            if (err) return done(err);
+          });
+      });
+    });
+  });
 });
