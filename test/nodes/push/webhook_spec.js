@@ -40,5 +40,30 @@ describe('webhook node', function() {
     });
   });
 
-  it('should send received payload to the next node');
+  it('should send received payload to the next node', function(done) {
+    var flow = [
+      { id: 'n1', type: 'webhook', url: '/webhook', wires: [['n2', 'n3']] },
+      { id: 'n2', type: 'log' },
+      { id: 'n3', type: 'helper' },
+    ];
+    helper.load([webhookNode, logNode], flow, function() {
+      var n1 = helper.getNode('n1');
+      var n2 = helper.getNode('n2');
+      var n3 = helper.getNode('n3');
+      n2.context().global.set('baseUrl', 'http://example.com');
+      n3.on('input', function(msg) {
+        msg.should.have.property('payload');
+        msg.payload.should.have.property('event', 'newCall');
+        done();
+      });
+      helper
+        .request()
+        .post(n1.url)
+        .expect(200)
+        .send('event=newCall')
+        .end(function(err, res) {
+          if (err) return done(err);
+        });
+    });
+  });
 });

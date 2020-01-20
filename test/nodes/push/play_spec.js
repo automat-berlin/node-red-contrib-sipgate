@@ -57,6 +57,5 @@ describe('play node', function() {
   });
 
   shared.shouldCreateAndRemoveCallbackEndpoint(playNode, 'play');
-
-  it('should send received callback payload to the next node');
+  shared.shouldSendCallbackPayloadToNextNode(playNode, 'play');
 });

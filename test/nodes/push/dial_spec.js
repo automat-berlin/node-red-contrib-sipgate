@@ -140,6 +140,5 @@ describe('dial node', function() {
   });
 
   shared.shouldCreateAndRemoveCallbackEndpoint(dialNode, 'dial');
-
-  it('should send received callback payload to the next node');
+  shared.shouldSendCallbackPayloadToNextNode(dialNode, 'dial');
 });
