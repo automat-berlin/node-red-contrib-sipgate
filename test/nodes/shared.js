@@ -1,6 +1,6 @@
-exports.shouldLoadCorrectly = function(node, type) {
-  var helper = require('node-red-node-test-helper');
+var helper = require('node-red-node-test-helper');
 
+exports.shouldLoadCorrectly = function(node, type) {
   it('should be loaded with proper name', function(done) {
     var flow = [{ id: 'n1', type: type, name: 'test name' }];
     helper.load(node, flow, function() {
@@ -12,8 +12,6 @@ exports.shouldLoadCorrectly = function(node, type) {
 };
 
 exports.shouldCreateAndRemoveCallbackEndpoint = function(node, type) {
-  var helper = require('node-red-node-test-helper');
-
   it('should create callback endpoint and remove it on close', function(done) {
     var flow = [{ id: 'n1', type: type, onAnswer: true, onHangup: true }];
     helper.load(node, flow, function() {
@@ -37,7 +35,6 @@ exports.shouldCreateAndRemoveCallbackEndpoint = function(node, type) {
 };
 
 exports.shouldSendCallbackPayloadToNextNode = function(node, type) {
-  var helper = require('node-red-node-test-helper');
   var events = ['answer', 'hangup'];
 
   events.forEach(function(event) {
