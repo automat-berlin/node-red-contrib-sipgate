@@ -8,7 +8,7 @@ _This is a community project. sipgate is a registered trademark of sipgate GmbH 
 
 You can get hands-on experience with Node-RED and sipgate nodes by deploying them to [Heroku](https://www.heroku.com). You only need a free account (no credit card required).
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](a href="https://heroku.com/deploy?template=https://github.com/automat-berlin/node-red-contrib-sipgate")
 
 Note: Deploy to Heroku button will not work properly if your browser is removing Referer HTTP header from the request.
 
